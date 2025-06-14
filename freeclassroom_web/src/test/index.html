@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form with MDBootstrap</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Sign up for Mailchimp</h2>
+                <p class="text-center mb-4">Create a free account or log in.</p>
+
+                <!-- Form -->
+                <form>
+                    <!-- Email Input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="email" class="form-control" placeholder="Email" />
+                    </div>
+
+                    <!-- Username Input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="username" class="form-control" placeholder="Username" />
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="password" class="form-control" placeholder="Password" />
+                        <button type="button" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y" style="margin-right: 1rem;">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="optOut" />
+                        <label class="form-check-label" for="optOut">
+                            I don't want to receive emails about Mailchimp and related Intuit product and feature updates, marketing best practices, and promotions from Mailchimp.
+                        </label>
+                    </div>
+
+                    <!-- Terms and Privacy -->
+                    <p class="text-center mb-4">
+                        By creating an account, you agree to our <a href="#">Terms</a> and have read and acknowledge the <a href="#">Global Privacy Statement</a>.
+                    </p>
+
+                    <!-- Sign Up Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> <!-- Replace with your Font Awesome kit ID -->
+</body>
+</html>

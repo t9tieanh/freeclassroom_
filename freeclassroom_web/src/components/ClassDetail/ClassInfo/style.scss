@@ -1,0 +1,13 @@
+.card-body-custom {
+    padding: 20px !important;
+}
+
+.tag {
+    padding: 4px !important;
+    display: flex;
+    gap: 2px;
+
+    img {
+        object-fit: cover !important; 
+    }
+}

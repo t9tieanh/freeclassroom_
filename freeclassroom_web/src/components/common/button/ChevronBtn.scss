@@ -1,0 +1,13 @@
+.chevron-btn {
+    background: url('../../assets/media/button/down-chevron.png') no-repeat center center;
+    background-size: contain; 
+    width: 35px;
+    height: 35px;
+    border: none; 
+    cursor: pointer; 
+
+    &.open {
+        background: url('../../assets/media/button/right-chevron.png') no-repeat center center;
+        background-size: contain; 
+    }
+}

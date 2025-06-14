@@ -1,0 +1,55 @@
+.verify-otp-container {
+height: 100vh;
+
+    .form-otp {
+        height: 60vh;
+    }
+}
+
+
+.high-ligt-text {
+    color: rgb(0, 115, 255);
+    font-weight: bold;
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.card-title {
+    max-width: 400px;
+    font-size: large;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+//loader 
+.loaderIcon {
+    margin-right: 7px;
+    top: 2px;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.fa-shield-halved {
+    font-size: 70px;
+    margin-top: 20px;
+}
+
+.verify-otp-container {
+    padding-inline: 10%;
+}
