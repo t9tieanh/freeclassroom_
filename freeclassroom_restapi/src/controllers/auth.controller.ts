@@ -1,16 +1,13 @@
-import { plainToClass } from 'class-transformer'
 import { Request, Response } from 'express'
-import { AuthDto } from '~/dto/request/Auth.dto'
-import sendResponse from '~/utils/send-response'
+import { StatusCodes } from 'http-status-codes'
+import sendResponse from '~/dto/response/send-response'
 import { AuthService } from '~/services'
 
 const login = async (req: Request, res: Response) => {
-  const authDto: AuthDto = plainToClass(AuthDto, req.body)
-
   sendResponse(res, {
-    code: 200,
+    code: StatusCodes.OK,
     message: 'Login successfully',
-    data: await AuthService.login(authDto)
+    result: await AuthService.login(req.data)
   })
 }
 

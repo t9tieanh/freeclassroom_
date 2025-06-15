@@ -1,8 +1,7 @@
 import express, { Request, Response } from 'express'
-import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
+import CONNECT_DB from '~/config/mongodb'
 import { env } from '~/config/env'
 import router from '~/routes/index'
-import exitHook from 'async-exit-hook'
 import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
 
 const START_SERVER = async () => {
@@ -24,11 +23,6 @@ const START_SERVER = async () => {
 
   app.listen(port, hostname, () => {
     console.log(`Hello , I am running at ${hostname}:${port}/`)
-  })
-
-  exitHook(() => {
-    CLOSE_DB()
-    console.log('Database connection closed')
   })
 }
 
