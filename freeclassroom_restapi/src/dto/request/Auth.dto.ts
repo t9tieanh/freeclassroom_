@@ -1,4 +1,5 @@
 import { IsString, IsNotEmpty } from 'class-validator'
+import { TokenType } from '~/enums/tokenType.enum'
 
 export class AuthDto {
   @IsString()
@@ -13,4 +14,5 @@ export class AuthDto {
 export interface JwtPayloadDto {
   username: string
   role: string
+  tokenType: TokenType
 }
