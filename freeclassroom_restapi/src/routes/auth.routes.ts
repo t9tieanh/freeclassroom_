@@ -1,10 +1,12 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import { AuthController } from '~/controllers'
 import { AuthDto } from '~/dto/request'
 import { ValidateDto } from '~/middleware'
+import { googleAuthController } from '~/controllers'
 
 const router = Router()
 
 router.get('/login', ValidateDto(AuthDto), AuthController.login)
+router.get('/oauth/google', googleAuthController.googleOauthHandler)
 
 export default router
