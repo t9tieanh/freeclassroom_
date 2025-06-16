@@ -1,2 +1,2 @@
 export { default as CreationUserDto } from './user.dto'
-export { AuthDto, JwtPayloadDto } from './auth.dto'
+export { AuthDto, JwtPayloadDto, GoogleOauthToken, GoogleUserResult } from './auth.dto'

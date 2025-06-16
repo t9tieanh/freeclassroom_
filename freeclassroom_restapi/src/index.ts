@@ -1,4 +1,6 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import cors from 'cors'
+import { corsOptions } from '~/config/cors'
 import CONNECT_DB from '~/config/mongodb'
 import { env } from '~/config/env'
 import router from '~/routes/index'
@@ -6,6 +8,9 @@ import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
 
 const START_SERVER = async () => {
   const app = express()
+  
+  // config cors 
+  app.use(cors(corsOptions))
 
   // thêm một middleware để phân tích cú pháp JSON trong body của reques
   app.use(express.json())

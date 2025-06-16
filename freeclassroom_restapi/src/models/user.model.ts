@@ -6,26 +6,25 @@ import { UserRole, UserStatus } from '~/enums/user.enum'
 
 // Define the interface for the User document -> kiểu trả về cho các document trong MongoDB
 interface UserDoc extends Document {
-  username: string
-  password: string
-  role: UserRole
+  username?: string
+  password?: string
+  role?: UserRole
   status: UserStatus
   email: string
-  image: string
+  image?: string
   name: string
-  phone: string
+  phone?: string
   description?: string
   position?: string
   isModified(path: string): boolean
 }
 
 const UserSchema: Schema = new Schema({
-  username: { type: String, require: true, unique: true },
-  password: { type: String, required: true, select: false },
+  username: { type: String, unique: true },
+  password: { type: String, select: false },
   role: {
     type: String,
-    enum: Object.values(UserRole),
-    required: true
+    enum: Object.values(UserRole)
   },
   status: {
     type: String,
@@ -42,9 +41,9 @@ const UserSchema: Schema = new Schema({
     }
   },
 
-  image: { type: String, required: true },
+  image: { type: String },
   name: { type: String, required: true },
-  phone: { type: String, required: true },
+  phone: { type: String },
 
   // fields for role TEACHER
   description: { type: String },
