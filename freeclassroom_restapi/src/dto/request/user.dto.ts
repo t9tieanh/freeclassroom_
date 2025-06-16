@@ -36,5 +36,5 @@ export default class CreationUserDto {
   // File upload thường không được validate bởi class-validator trực tiếp.
   // Nhưng bạn có thể bỏ qua hoặc xử lý riêng qua middleware như Multer.
   @IsOptional()
-  imageFile: File
+  imageFile?: File
 }

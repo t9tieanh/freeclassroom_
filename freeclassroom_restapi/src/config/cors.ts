@@ -2,7 +2,7 @@ import { WHITELIST_DOMAINS } from '~/utils/constants'
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '~/middleware/ApiError'
 
-// Cấu hình CORS Option trong dự án thực tế 
+// Cấu hình CORS Option trong dự án thực tế
 export const corsOptions = {
   origin: function (origin: any, callback: any) {
     // Cho phép việc gọi API bằng POSTMAN trên môi trường dev,

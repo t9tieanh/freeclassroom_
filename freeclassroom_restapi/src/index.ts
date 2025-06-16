@@ -8,8 +8,8 @@ import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
 
 const START_SERVER = async () => {
   const app = express()
-  
-  // config cors 
+
+  // config cors
   app.use(cors(corsOptions))
 
   // thêm một middleware để phân tích cú pháp JSON trong body của reques
