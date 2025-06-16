@@ -93,7 +93,7 @@ const loginGoogle = async ({ code }: { code: string }) => {
     }
   }
 
-  // trường hợp user đã onboard vào hệ thống -> trả thêm token 
+  // trường hợp user đã onboard vào hệ thống -> trả thêm token
   return {
     isActive: true,
     email: user.email,

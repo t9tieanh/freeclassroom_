@@ -5,7 +5,9 @@ import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
 
 const validateDto = (dtoClass: any) => async (req: Request, res: Response, next: NextFunction) => {
-  const instance = plainToInstance(dtoClass, req.body)
+  const instance = plainToInstance(dtoClass, req.body, {
+    enableImplicitConversion: true
+  })
 
   if (!instance) throw new ApiError(StatusCodes.BAD_REQUEST, 'Dữ liệu không hợp lệ !')
 
