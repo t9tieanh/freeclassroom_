@@ -5,9 +5,17 @@ import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
 
 const validateDto = (dtoClass: any) => async (req: Request, res: Response, next: NextFunction) => {
-  const instance = plainToInstance(dtoClass, req.body, {
-    enableImplicitConversion: true
-  })
+  const payload: any = {
+    ...req.body
+  }
+
+  // Nếu có file được upload thì thêm buffer & fileName
+  if (req.file && req.file.buffer) {
+    payload.image = req.file.buffer
+    payload.fileName = req.file.originalname
+  }
+
+  const instance = plainToInstance(dtoClass, payload)
 
   if (!instance) throw new ApiError(StatusCodes.BAD_REQUEST, 'Dữ liệu không hợp lệ !')
 

@@ -1,4 +1,4 @@
-import { AuthDto, JwtPayloadDto } from '~/dto/request'
+import { AuthDto } from '~/dto/request'
 import { GenerateSignature } from '~/utils/JwtUtil'
 import { UserModel } from '~/models'
 import ApiError from '~/middleware/ApiError'

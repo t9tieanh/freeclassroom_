@@ -13,5 +13,8 @@ export const env = {
   GOOGLE_OAUTH_CLIENT_ID: (process.env.GOOGLE_OAUTH_CLIENT_ID as string) || '',
   GOOGLE_OAUTH_REDIRECT: (process.env.GOOGLE_OAUTH_REDIRECT as string) || '',
   GOOGLE_OAUTH_CLIENT_SECRET: (process.env.GOOGLE_OAUTH_CLIENT_SECRET as string) || '',
-  FRONTEND_ORIGIN: (process.env.FRONTEND_ORIGIN as string) || ''
+  FRONTEND_ORIGIN: (process.env.FRONTEND_ORIGIN as string) || '',
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || ''
 }

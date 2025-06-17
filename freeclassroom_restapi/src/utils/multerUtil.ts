@@ -4,9 +4,9 @@ import ApiError from '~/middleware/ApiError'
 import path from 'path'
 import { Request } from 'express'
 
-//config multer để ném lỗi khi file không hợp lệ
+// Multer config: lưu vào RAM (buffer) + lọc file ảnh
 const upload = multer({
-  storage: multer.diskStorage({}),
+  storage: multer.memoryStorage(), // LƯU VÀO RAM (Buffer)
   fileFilter: (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
     const ext = path.extname(file.originalname).toLowerCase()
 
@@ -15,6 +15,10 @@ const upload = multer({
     }
 
     cb(null, true)
+  },
+  limits: {
+    // giới hạn 5MB
+    fileSize: 10 * 1024 * 1024
   }
 })
 

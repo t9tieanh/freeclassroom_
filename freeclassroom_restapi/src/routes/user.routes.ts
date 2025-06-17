@@ -2,10 +2,11 @@ import { Router } from 'express'
 import { CreationUserDto } from '~/dto/request'
 import { authenticate, ValidateDto } from '~/middleware'
 import { UserController } from '~/controllers'
+import upload from '~/utils/multerUtil'
 
 const router = Router()
 
-router.post('/sign-up', ValidateDto(CreationUserDto), UserController.signUp)
+router.post('/sign-up', upload.single('image'), ValidateDto(CreationUserDto), UserController.signUp)
 //router.post('/active-account')
 
 // route authenticate
