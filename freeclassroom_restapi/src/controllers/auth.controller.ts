@@ -6,7 +6,7 @@ import { AuthService } from '~/services'
 const login = async (req: Request, res: Response) => {
   sendResponse(res, {
     code: StatusCodes.OK,
-    message: 'Login successfully',
+    message: 'Đăng nhập thành công !',
     result: await AuthService.login(req.data)
   })
 }

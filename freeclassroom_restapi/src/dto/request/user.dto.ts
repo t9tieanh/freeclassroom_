@@ -1,7 +1,8 @@
 import { UserStatus, UserRole } from '~/enums/user.enum'
 import { IsEmail, IsString, IsNotEmpty, IsEnum, IsOptional, Matches } from 'class-validator'
+import SingleImageUploadDto from './SingleImageUpload.dto'
 
-export default class CreationUserDto {
+export default class CreationUserDto extends SingleImageUploadDto {
   @IsEmail({}, { message: 'Email không hợp lệ' })
   email: string
 
@@ -12,10 +13,6 @@ export default class CreationUserDto {
   @IsString()
   @IsNotEmpty({ message: 'Số điện thoại không được để trống' })
   phone: string
-
-  @IsString()
-  @IsOptional()
-  image: string
 
   @IsString()
   @IsNotEmpty({ message: 'Username không được để trống' })
@@ -32,9 +29,4 @@ export default class CreationUserDto {
 
   @IsEnum(UserStatus, { message: 'Trạng thái không hợp lệ' })
   status: UserStatus
-
-  // File upload thường không được validate bởi class-validator trực tiếp.
-  // Nhưng bạn có thể bỏ qua hoặc xử lý riêng qua middleware như Multer.
-  @IsOptional()
-  imageFile?: File
 }

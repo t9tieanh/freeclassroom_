@@ -4,14 +4,20 @@ import ApiError from '~/middleware/ApiError'
 import { StatusCodes } from 'http-status-codes'
 import { GeneratePassword } from '~/utils/BcryptUtil'
 import { UserRole } from '~/enums/user.enum'
+import imageService from './image.service'
 
 const signUp = async (request: CreationUserDto) => {
+
   const isExisted = await UserModel.exists({
     $or: [{ email: request.email }, { username: request.username }]
   })
   if (isExisted) {
     throw new ApiError(StatusCodes.BAD_REQUEST, 'Người dùng đã tồn tại!')
   }
+
+  // lưu avartar của user vào cloundinary
+  const uploadImageUrl = await imageService.uploadImage(request.image, request.fileName)
+
 
   // Hash password
   request.password = await GeneratePassword(request.password)
@@ -23,7 +29,7 @@ const signUp = async (request: CreationUserDto) => {
     role: request.role,
     status: request.status,
     email: request.email,
-    image: request.image,
+    image: uploadImageUrl,
     name: request.name,
     phone: request.phone,
     // Optional fields for teacher
@@ -40,7 +46,7 @@ const signUp = async (request: CreationUserDto) => {
 }
 
 const getProfile = async (user: JwtPayloadDto) => {
-  return await UserModel.findOne({ username: user.username }).select('username role email name phone -_id')
+  return await UserModel.findOne({ username: user.username }).select('username role email name phone image -_id')
 }
 
 const UserService = {
