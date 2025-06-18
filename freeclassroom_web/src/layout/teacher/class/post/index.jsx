@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import ClassCover from "../../../../components/ClassRoom/ClassCover";
-import "./style.scss";
 import SideBar from '../../../../components/Teacher/SideBar';
 
 const PostLayout = ({post}) => {

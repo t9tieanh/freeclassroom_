@@ -22,9 +22,19 @@ const getProfile = async (req: Request, res: Response) => {
   })
 }
 
+const activeAccount = async (req: Request, res: Response) => {
+  const result = await UserService.activeAccount(req.data)
+  sendResponse(res, {
+    code: StatusCodes.OK,
+    message: 'Đăng ký tài khoản thành công, vui lòng đăng nhập lại !',
+    result: result
+  })
+}
+
 const UserController = {
   signUp,
-  getProfile
+  getProfile,
+  activeAccount
 }
 
 export default UserController

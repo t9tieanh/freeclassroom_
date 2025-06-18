@@ -7,6 +7,7 @@ import upload from '~/utils/multerUtil'
 const router = Router()
 
 router.post('/sign-up', upload.single('image'), ValidateDto(CreationUserDto), UserController.signUp)
+router.post('/active-account', upload.single('image'), ValidateDto(CreationUserDto), UserController.activeAccount)
 //router.post('/active-account')
 
 // route authenticate

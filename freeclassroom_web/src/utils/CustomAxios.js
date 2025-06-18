@@ -4,7 +4,7 @@ import { store } from "../redux/store";
 import { doUpdateToken } from "../redux/action/updateToken";
 
 const instance = axios.create({
-    baseURL: "http://localhost:8080/freeclassroom",
+    baseURL: "http://localhost:8017/",
     withCredentials: true,
 });
 
@@ -100,7 +100,7 @@ instance.interceptors.response.use(
             });
         }
 
-        return Promise.reject(error);
+        return error;
     }
 );
 

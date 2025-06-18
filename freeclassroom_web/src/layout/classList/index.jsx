@@ -1,6 +1,6 @@
 
 import { Outlet } from 'react-router-dom';
-import SideBar from '../../../components/Teacher/SideBar';
+import SideBar from '~/components/Teacher/SideBar';
 
 const ClassListLayout = () => {
     return (

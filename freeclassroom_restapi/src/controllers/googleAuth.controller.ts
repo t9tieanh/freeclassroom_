@@ -13,10 +13,12 @@ const googleOauthHandler = async (req: Request, res: Response) => {
       throw new ApiError(StatusCodes.UNAUTHORIZED, 'Không tìm thấy authorization code !')
     }
 
+    const result = await googleAuthService.loginGoogle({ code })
+
     sendResponse(res, {
       code: StatusCodes.OK,
       message: 'Xác thực google thành công !',
-      result: await googleAuthService.loginGoogle({ code })
+      result: result
     })
   } catch (err: any) {
     console.log(err)

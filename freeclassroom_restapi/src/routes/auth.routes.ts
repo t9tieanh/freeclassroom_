@@ -6,7 +6,7 @@ import { googleAuthController } from '~/controllers'
 
 const router = Router()
 
-router.get('/login', ValidateDto(AuthDto), AuthController.login)
+router.post('/login', ValidateDto(AuthDto), AuthController.login)
 router.get('/oauth/google', googleAuthController.googleOauthHandler)
 
 export default router
