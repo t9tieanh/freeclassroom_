@@ -3,36 +3,29 @@ import  "./style.scss";
 import { toast } from 'react-toastify';
 import { activeGGAccount } from "../../../service/ggAuth/GoogleAuthentionService";
 import { useDispatch } from "react-redux";
-import { doSaveOtp } from "../../../redux/action/verifyOtpAction";
 import { useNavigate } from "react-router-dom";
+import TextInput from '~/components/common/Input/Input2'
 
 const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
 
-    const [formData, setFormData] = useState({
-        username:"",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-        role: "TEACHER",
-        file: null,
-    });
+    const [username, setUsername] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [role, setRole] = useState("TEACHER");
+    const [file, setFile] = useState(null);
 
     const navigator = useNavigate()
 
     const [isLoadingVerify,setIsLoadingVerify] = useState(false)
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
     // Hàm tải ảnh từ imgUrl và chuyển thành File
     const convertImageUrlToFile = async (url) => {
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, { mode: 'cors' });
             const blob = await response.blob();
-            const file = new File([blob], "profile-image.jpg", { type: blob.type });
-            setFormData((prev) => ({ ...prev, file }));
+            const file = new File([blob], `profile-image${new Date().getTime}.jpg`, { type: 'image/jpeg' });
+            setFile(file)
         } catch (error) {
             console.error("Lỗi khi chuyển đổi ảnh:", error);
         }
@@ -45,30 +38,28 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
     }, [imgUrl]);
 
 
-    const dispatch = useDispatch()
-
+    // tiến hành active account
     const handleSubmit = async(e) => {
         e.preventDefault();
         
-        if (formData.password !== formData.confirmPassword){
-            toast.error("Password does not match!");
+        if (password !== confirmPassword){
+            toast.error("Mật khẩu không trùng khớp !");
             return
         }
 
         setIsLoadingVerify(true)
 
-        const data = await activeGGAccount(formData.file, email, name, formData.phone, formData.username, formData.password, formData.role)
+        const data = await activeGGAccount(file, email, name, phone, username, password, role)
 
         setIsLoadingVerify(false)
 
-        if (data && data.code && data.code == 200) {
-            console.log(data?.result?.username)
-            dispatch(doSaveOtp(data?.result?.username))
+        if (data && data.code && data.code === 200) {
             toast.success(data?.message)
-            toast.success("Please log in again !")
             navigator("/login")
-        }
-        else toast.error(data?.message)
+        } else if (data.response && data.response.data) {
+            console.log(data)
+            toast.error(data.response.data.message)
+        } else toast.error(data?.message)
 
     };
 
@@ -88,6 +79,7 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
                 <div className="col-4 mx-auto " style={{ marginTop: "15px", marginBottom: "15px" }}>
                     <img
                         src={imgUrl}
+                        referrerpolicy="no-referrer"
                         className="img-responsive product-img" alt="Image" 
                     />
                 </div>
@@ -96,55 +88,49 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
 
             <div className="row">
                 <div className="col-md-6 mb-4">
-                    <input
+                    {/* <input
                         name="username"
                         type="text"
                         className="form-control"
                         placeholder="Username"
-                        value={formData.username}
+                        value={username}
                         onChange={handleChange}
+                    /> */}
+                    <TextInput name={'Username'} 
+                        placeholder={'Nhập username'} value={username}
+                        setValue={setUsername} 
                     />
                 </div>
                 <div className="col-md-6">
-                    <input
-                        name="phone"
-                        type="tel"
-                        className="form-control mb-4"
-                        placeholder="Phone"
-                        value={formData.phone}
-                        onChange={handleChange}
+                    <TextInput name={'Số điện thoại'} 
+                        placeholder={'Nhập số điện thoại'} value={phone}
+                        setValue={setPhone} 
                     />
                 </div>
             </div>
 
 
-            <input
-                name="password"
-                type="password"
-                className="form-control mb-4"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
+            <TextInput name={'Mật khẩu'} 
+                placeholder={'Nhập mật khẩu'} value={password}
+                inputType={'password'}
+                setValue={setPassword} 
             />
 
-            <input
-                name="confirmPassword"
-                type="password"
-                className="form-control mb-4"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+            <TextInput name={'Xác nhận mật khẩu'} 
+                inputType={'password'}
+                placeholder={'Nhập lại mật khẩu'} value={confirmPassword}
+                setValue={setConfirmPassword} 
             />
 
-            <div className="btn-group mb-4">
+            <div className="btn-group mb-4 mt-4">
                 <input
                     type="radio"
                     className='btn-check'
                     name="role"
                     id="teacher"
                     value="TEACHER"
-                    checked={formData.role === "TEACHER"}
-                    onChange={handleChange}
+                    checked={role === "TEACHER"}
+                    onChange={() => {setRole('TEACHER')}}
                 />
                 <label className="btn btn-secondary" htmlFor="teacher">
                     Teacher
@@ -156,8 +142,8 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
                     name="role"
                     id="student"
                     value="STUDENT"
-                    checked={formData.role === "STUDENT"}
-                    onChange={handleChange}
+                    checked={role === "STUDENT"}
+                    onChange={() => {setRole('STUDENT')}}
                 />
                 <label className="btn btn-secondary" htmlFor="student">
                     Student

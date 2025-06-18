@@ -10,6 +10,7 @@ const uploadImage = async (buffer: Buffer, filename: string): Promise<string> =>
         public_id: filename.split('.')[0]
       },
       (error, result: any) => {
+        console.log(error)
         if (error || !result?.secure_url) {
           return reject(new ApiError(StatusCodes.BAD_REQUEST, 'Có lỗi khi upload ảnh!'))
         }

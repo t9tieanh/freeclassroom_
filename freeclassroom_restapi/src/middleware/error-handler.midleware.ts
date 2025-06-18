@@ -9,7 +9,7 @@ export const errorHandlingMiddleware = (err: ApiError, req: Request, res: Respon
 
   // Tạo ra một biến responseError để kiểm soát những gì muốn trả về
   const responseError = {
-    statusCode: err.status,
+    code: err.status,
     message: err.message || StatusCodes[err.status], // Nếu lỗi mà không có message thì lấy ReasonPhrases chuẩn theo mã Status Code
     stack: err.stack
   }
@@ -25,5 +25,5 @@ export const errorHandlingMiddleware = (err: ApiError, req: Request, res: Respon
   // console.error(responseError)
 
   // Trả responseError về phía Front-end
-  res.status(responseError.statusCode).json(responseError)
+  res.status(responseError.code).json(responseError)
 }

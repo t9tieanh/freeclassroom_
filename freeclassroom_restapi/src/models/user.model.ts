@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes'
 import { UserRole, UserStatus } from '~/enums/user.enum'
 
 // Define the interface for the User document -> kiểu trả về cho các document trong MongoDB
-interface UserDoc extends Document {
+export interface UserDoc extends Document {
   username?: string
   password?: string
   role?: UserRole

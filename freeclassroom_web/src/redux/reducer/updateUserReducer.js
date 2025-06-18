@@ -8,6 +8,7 @@ const INITIAL_STATE = {
         accessToken: "",
         refreshToken : "",
         username: "",
+        image: "",
         email: "",
         role: "",
     },
@@ -23,9 +24,10 @@ const updateUserReducer = (state = INITIAL_STATE, action) => {
                     refreshToken : action.payload.refreshToken,
                     username : action.payload.username, 
                     email : action.payload.email, 
+                    image : action.payload.image,
                     role : action.payload.role, 
                 }, 
-                isAuthentication : action.payload.valid
+                isAuthentication : action.payload.isValid
             };
         
         case DeleteUser: 
@@ -34,7 +36,6 @@ const updateUserReducer = (state = INITIAL_STATE, action) => {
             }
 
         case UPDATE_TOKEN:
-            console.log("token mới đây : ",action.payload); 
             return {
                 ...state, 
                 account: {

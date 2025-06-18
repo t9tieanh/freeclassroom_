@@ -69,7 +69,7 @@ const loginGoogle = async ({ code }: { code: string }) => {
   })
 
   // tìm kiếm user xem user này đã được onboard vào hệ thống chưa
-  let user = await UserModel.findOne({ email: userData.email }).select('status email name image')
+  let user = await UserModel.findOne({ email: userData.email })
 
   // trường hợp user chưa được onboard vào hệ thống
   if (!user || !user.status) {
@@ -77,7 +77,8 @@ const loginGoogle = async ({ code }: { code: string }) => {
     const newUser = new UserModel({
       status: UserStatus.INACTIVE,
       email: userData.email,
-      name: userData.name
+      name: userData.name,
+      image: userData.picture
     })
 
     user = await newUser.save()
@@ -87,18 +88,19 @@ const loginGoogle = async ({ code }: { code: string }) => {
     // trường hợp user chưa được onboard vào hệ thống
     return {
       isActive: false,
-      email: user.email,
-      name: user.name,
+      email: userData.email,
+      name: userData.name,
       imageUrl: userData.picture // trả thêm picture
     }
   }
 
   // trường hợp user đã onboard vào hệ thống -> trả thêm token
   return {
-    isActive: true,
+    isValid: true,
     email: user.email,
     name: user.name,
     role: user.role,
+    image: user.image,
     username: user.username,
     accessToken: await GenerateSignature({
       username: user.username as string,

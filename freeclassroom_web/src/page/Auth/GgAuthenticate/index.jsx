@@ -8,6 +8,7 @@ import './style.scss';
 import RegisterForm from "../../../components/RegisterPage/RegisterForm";
 import { data } from "jquery";
 import { set } from "nprogress";
+import { toast } from "react-toastify";
 
 export const GGIcon = () => {
     return <>
@@ -39,8 +40,9 @@ const AuthenticationPage = () => {
     
                 if (data && data.code && data.code === 200 && data?.result) {
                     setIsLoading(false);
-                    if (data.result.active) {
+                    if (data.result.isValid) {
                         // Xử lý cho người dùng cũ (đã có tài khoản)
+                        toast.success(data.message)
                         dispatch(doUpdateUser(data.result))
                         navigator('/')
                     }
