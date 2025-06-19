@@ -1,13 +1,19 @@
-.card-body-custom {
-    padding: 20px !important;
-}
+.class-info {
+    .card-body-custom {
+        padding: 20px !important;
+    }
 
-.tag {
-    padding: 4px !important;
-    display: flex;
-    gap: 2px;
+    .tag {
+        padding: 4px !important;
+        display: flex;
+        gap: 2px;
 
-    img {
-        object-fit: cover !important; 
+        img {
+            object-fit: cover !important; 
+        }
+    }
+
+    h6.text-muted {
+        font-size: 16px !important;
     }
 }

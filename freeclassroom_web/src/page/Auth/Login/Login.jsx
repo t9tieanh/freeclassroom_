@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.scss';
 import LoginForm from '~/components/Login/LoginForm';
-import LoginCover from '~/components/Login/Corver'
+import LoginCover from '~/components/Login/Cover'
 
 const Login = () => {
 

@@ -1,13 +1,11 @@
 .verify-otp-container {
-height: 100vh;
+    height: 100vh;
 
     .form-otp {
         height: 60vh;
     }
-}
 
-
-.high-ligt-text {
+    .high-ligt-text {
     color: rgb(0, 115, 255);
     font-weight: bold;
 }
@@ -52,4 +50,6 @@ height: 100vh;
 
 .verify-otp-container {
     padding-inline: 10%;
+}
+
 }

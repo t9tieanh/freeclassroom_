@@ -26,7 +26,7 @@ const signUp = async (request: CreationUserDto) => {
     username: request.username,
     password: request.password,
     role: request.role,
-    status: request.status,
+    status: UserStatus.INACTIVE,
     email: request.email,
     image: uploadImageUrl,
     name: request.name,
@@ -46,6 +46,10 @@ const signUp = async (request: CreationUserDto) => {
 
 //active lại account
 const activeAccount = async (user: CreationUserDto) => {
+  // validate username
+  if (await UserModel.exists({ username: user.username }))
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Username đã tồn tại !')
+
   // Hash password
   user.password = await GeneratePassword(user.password)
 

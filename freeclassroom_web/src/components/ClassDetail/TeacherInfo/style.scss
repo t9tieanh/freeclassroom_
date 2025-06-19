@@ -1,14 +1,5 @@
-.teacherinfo-container {
-    .teacher-avatar {
-        padding: 20px
+.teacher-info-container {
+    .row {
+        font-size: 15px !important;
     }
-
-    .card-body {
-        padding: 0px;
-        
-        .row.align-items-center {
-            min-width: 100%;
-        }
-    }
-    
 }

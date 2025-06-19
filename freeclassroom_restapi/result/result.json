@@ -1,0 +1,56 @@
+{
+    "code": 200,
+    "message": "Get your class successful!",
+    "result": {
+        "name": "Math Class",
+        "unit": "Algebra",
+        "code": "MATH101",
+        "detail": "This is an advanced algebra class.",
+        "coverImage": "1d349392-59f7-4d66-b13e-f99df1e060ae.png",
+        "sections": [
+            {
+                "id": "020cb2b2-b11e-48d7-ba74-6bc1d8eee982",
+                "title": "Lập trình java cơ bản",
+                "content": "Phần này giới thiệu về các khái niệm cơ bản trong Java, bao gồm biến, kiểu dữ liệu, vòng lặp, và phương thức. ",
+                "createDate": "2025-02-28",
+                "emphasized": true
+            },
+            {
+                "id": "45ce68cf-2b55-4cca-9c66-a11892c3823e",
+                "title": "Section 1",
+                "content": "Đây là section 1",
+                "createDate": "2025-02-28",
+                "emphasized": false
+            },
+            {
+                "id": "5cccec24-b3f1-4451-a785-23af37c0968d",
+                "title": "Section 1",
+                "content": "Đây là section 1",
+                "createDate": "2025-02-28",
+                "emphasized": false
+            }
+        ],
+        "teacher": {
+            "email": "phama9162dsfadsfadfa3dfsa@gmail.com",
+            "image": "70a7142b-2191-43f3-9937-d2fa3cb9ac25.jpg",
+            "name": "Phạm Tiến Anh",
+            "phone": "0856230326",
+            "description": "Hello, tôi ở đây để giúp các bạn !",
+            "position": "JAVA BACKEND"
+        },
+        "tag": [
+            {
+                "name": "Java",
+                "iconUrl": "ce70dbeb-dc66-494a-97a5-9fc2e2cbcfb2.png"
+            },
+            {
+                "name": "Javascript",
+                "iconUrl": "04f046f8-92d8-46e6-b142-7b754cfe74ae.png"
+            },
+            {
+                "name": "Node js",
+                "iconUrl": "d6696384-0d99-4aa6-b44d-43c98873af3c.png"
+            }
+        ]
+    }
+}

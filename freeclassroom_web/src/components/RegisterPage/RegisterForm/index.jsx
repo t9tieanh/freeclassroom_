@@ -88,14 +88,6 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
 
             <div className="row">
                 <div className="col-md-6 mb-4">
-                    {/* <input
-                        name="username"
-                        type="text"
-                        className="form-control"
-                        placeholder="Username"
-                        value={username}
-                        onChange={handleChange}
-                    /> */}
                     <TextInput name={'Username'} 
                         placeholder={'Nhập username'} value={username}
                         setValue={setUsername} 

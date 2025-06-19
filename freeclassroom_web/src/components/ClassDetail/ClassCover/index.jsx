@@ -1,19 +1,24 @@
 import './style.scss'
-import { CiTimer } from "react-icons/ci";
+import { CiTimer } from 'react-icons/ci';
+import baseLogo from '~/assets/media/image.png'
 
-const ClassCover = ({name}) => {
+const ClassCover = ({name, cover}) => {
 
     return (
         <>
-            <div class="card bg-dark text-white cover-class">
-                    <img  height={"300px"} src="https://fhqx.hcmute.edu.vn/pluginfile.php/1/theme_maker/defaultcourseimage/1734673769/fhq%20utext%20course%20banner%20%281%29.jpg"  alt="Stony Beach"/>
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">
-                            <blockquote className="blockquote title-class">
-                                <p className="mb-0">{name}</p>
+            <div class='card bg-dark text-white cover-class'>
+                    <img
+                        src={cover || baseLogo}
+                        alt="Bìa của Lớp học"
+                        style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                    />
+                    <div class='card-img-overlay'>
+                        <h5 class='card-title'>
+                            <blockquote className='blockquote title-class'>
+                                <p className='mb-0'>{name}</p>
                             </blockquote>
                         </h5>
-                        <p class="card-text title-updatedate"><CiTimer />&nbsp;Last updated 3 mins ago</p>
+                        <p class='card-text title-update-date'><CiTimer />&nbsp;Cập nhật 3h trước</p>
                     </div>
             </div>
         </>
