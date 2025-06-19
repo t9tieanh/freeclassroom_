@@ -103,11 +103,13 @@ const loginGoogle = async ({ code }: { code: string }) => {
     image: user.image,
     username: user.username,
     accessToken: await GenerateSignature({
+      userId: user.id,
       username: user.username as string,
       role: user.role as string,
       tokenType: TokenType.ACCESS_TOKEN
     }),
     refreshToken: await GenerateSignature({
+      userId: user.id,
       username: user.username as string,
       role: user.role as string,
       tokenType: TokenType.RESFESH_TOKEN

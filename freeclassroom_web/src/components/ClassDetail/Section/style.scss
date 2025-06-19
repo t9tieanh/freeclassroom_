@@ -74,19 +74,7 @@
     border-radius: 10px;
     width: 40px !important;
     height: 40px !important;
-    background-color: whitesmoke;
-
-
-    .chevron-btn {
-        background: url('../../../assets/media/button/down-chevron.png') no-repeat center center;
-        background-size: contain; 
-        cursor: pointer; 
-    
-        &.collapsed {
-            background: url('../../../assets/media/button/right-chevron.png') no-repeat center center;
-            background-size: contain; 
-        }
-    }    
+    background-color: whitesmoke;  
 
 }
 
@@ -98,8 +86,9 @@
     border: none; 
     cursor: pointer; 
 
-    &.open {
-        background: url('../../../assets/media/button/right-chevron.png') no-repeat center center;
-        background-size: contain; 
+    &.show {
+        background: url('../../../assets/media/button/right-chevron.png') no-repeat center center !important;
+        background-size: contain !important; 
     }
 }
+

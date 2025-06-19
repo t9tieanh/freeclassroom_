@@ -1,8 +1,10 @@
-import SectionDetail from "../Post/index.jsx"
+import SectionDetail from '../Post/index.jsx'
 import './style.scss'
-import { MdOutlinePlayLesson } from "react-icons/md";
-import { getPostsBySectionId } from "../../../service/section/SectionService";
-import { useEffect, useState } from "react";
+import { MdOutlinePlayLesson } from 'react-icons/md';
+import { getPostsBySectionId } from '../../../service/section/SectionService';
+import { useEffect, useState } from 'react';
+import Tag from '~/components/common/tag'
+import Card from '~/components/common/Card'
 
 const SectionComponent = ({index,section}) => {
 
@@ -17,10 +19,8 @@ const SectionComponent = ({index,section}) => {
     }, []);
 
     useEffect(() => {
-
         if (isOpenSection)
             fetchPosts(section.id)
-        
     }, [isOpenSection]);
 
 
@@ -40,23 +40,24 @@ const SectionComponent = ({index,section}) => {
     return (
         <>
         <div id={`accordion${index}`}  className={`section-container ${section?.emphasized == true && 'section-emphasize-container'}`}>
-
-        <div className="card">
-            <div className="card-header" id={`headingOne-${index}`}>
-                <h5 className="mb-0 row justify-content-between">
-                    <div className="text-start col-4"><MdOutlinePlayLesson />&nbsp;{section?.title} </div>
-                    <div className="col-3 chevron-btn-container shadow-5">
-                        <button className="chevron-btn" data-toggle="collapse" onClick={handleOpenSection} data-target={`#collapseOne-${index}`} aria-expanded="true" aria-controls={`collapseOne-${index}`}>
+        <div className='card'>
+            <div className='card-header' id={`headingOne-${index}`}>
+                <h5 className='mb-0 row justify-content-between'>
+                    <div className='text-start col-4'><MdOutlinePlayLesson />&nbsp;{section?.title} </div>
+                    <div className='col-3 chevron-btn-container shadow-5'>
+                        <button className={`chevron-btn ${isOpenSection == true && 'show'}`} data-toggle='collapse' onClick={handleOpenSection} data-target={`#collapseOne-${index}`} aria-expanded='true' aria-controls={`collapseOne-${index}`}>
                         </button>
                     </div>
                 </h5>
-                {section?.emphasized == true && <div className="emphasized-title">* Đã được nhấn mạnh</div>}
+                {section?.emphasized === true && 
+                    <div className='emphasized-title'>* Đã được nhấn mạnh</div>
+                }
             </div>
 
 
             <div id={`collapseOne-${index}`} className={`collapse ${isOpenSection == true && 'show'}`} aria-labelledby={`headingOne-${index}`} data-parent={`#accordion${index}`}>
-            <div className="card-body">
-                <div className="content-section">{section?.content}
+            <div className='card-body'>
+                <div className='content-section'>{section?.content}
                 <hr/>
                 </div>
                 {

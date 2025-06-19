@@ -27,11 +27,13 @@ const login = async (request: AuthDto) => {
   // tạo jwt token
   return {
     accessToken: await GenerateSignature({
+      userId: user.id,
       username: user.username,
       role: user.role,
       tokenType: TokenType.ACCESS_TOKEN
     }),
     refreshToken: await GenerateSignature({
+      userId: user.id,
       username: user.username,
       role: user.role,
       tokenType: TokenType.RESFESH_TOKEN

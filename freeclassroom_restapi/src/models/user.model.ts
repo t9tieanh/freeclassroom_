@@ -1,8 +1,9 @@
-import mongoose, { Schema, Document, Model } from 'mongoose'
+import mongoose, { Schema, Document, Model, Types } from 'mongoose'
 import validator from 'validator'
 import ApiError from '~/middleware/ApiError'
 import { StatusCodes } from 'http-status-codes'
 import { UserRole, UserStatus } from '~/enums/user.enum'
+import { ClassroomDoc } from './classroom.model'
 
 // Define the interface for the User document -> kiểu trả về cho các document trong MongoDB
 export interface UserDoc extends Document {
@@ -14,8 +15,14 @@ export interface UserDoc extends Document {
   image?: string
   name: string
   phone?: string
+
+  // for teacher
   description?: string
   position?: string
+  classroomsManaged?: ClassroomDoc[]
+
+  //for student
+  classroomsJoined?: ClassroomDoc[]
   isModified(path: string): boolean
 }
 
@@ -47,7 +54,11 @@ const UserSchema: Schema = new Schema({
 
   // fields for role TEACHER
   description: { type: String },
-  position: { type: String }
+  position: { type: String },
+  classroomsManaged: [{ type: Schema.Types.ObjectId, ref: 'Classroom', default: undefined }],
+
+  //fields for role Student
+  classroomsJoined: [{ type: Schema.Types.ObjectId, ref: 'Classroom', default: undefined }]
 })
 
 UserSchema.pre('save', async function (this: UserDoc) {

@@ -1,22 +1,25 @@
 .cover-class {
+    background-color: white !important;
     min-height: 300px;
-    max-height: 300px;
+    width: 100vw;
     border-radius: 0px;
     margin-top: 15px;
 
     .title-class {
-        font-size: 200px;
+        padding: 10px;
+        font-size: 20px !important;
         font-weight: bold;
         background-color: #186fcc;
         border-radius: 20px;
         width: fit-content;
     }
 
-    .title-updatedate {
+    .title-update-date {
         background-color: white;
         color: black;
         width: fit-content;
         padding: 10px;
+        font-size: 12px !important;
         border-radius: 10px;
     }
 

@@ -4,7 +4,6 @@ import { FaGem } from 'react-icons/fa';
 const SidebarComponent = () => {
     return (
         <>
-        
         <Sidebar backgroundColor="white">
             <Menu>
                 <SubMenu label="Class Management" icon={<FaGem />}>
@@ -14,9 +13,7 @@ const SidebarComponent = () => {
                 <MenuItem> Documentation </MenuItem>
                 <MenuItem> Calendar </MenuItem>
             </Menu>
-        
         </Sidebar>
-        
         </>
     )
 }

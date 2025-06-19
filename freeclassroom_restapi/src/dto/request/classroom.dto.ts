@@ -1,5 +1,6 @@
 import { IsString, IsOptional, IsNotEmpty, IsArray, ValidateNested, IsUrl } from 'class-validator'
 import { Type } from 'class-transformer'
+import singleImageUploadDto from './SingleImageUpload.dto'
 
 class TagDto {
   @IsString()
@@ -11,7 +12,7 @@ class TagDto {
   iconUrl: string
 }
 
-export class CreationClassroomDto {
+export class CreationClassroomDto extends singleImageUploadDto {
   @IsOptional()
   @IsString()
   name?: string
@@ -28,18 +29,16 @@ export class CreationClassroomDto {
   @IsString()
   detail?: string
 
-  @IsString()
-  @IsNotEmpty()
-  @IsUrl()
-  coverImage: string
-
-  @IsString()
-  @IsNotEmpty()
-  teacher: string
-
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => TagDto)
   tags?: TagDto[]
+}
+
+// dto chứa request tham gia lớp học của một student
+export class JoinClassroomDto {
+  @IsString()
+  @IsNotEmpty()
+  classRoomCode: string
 }

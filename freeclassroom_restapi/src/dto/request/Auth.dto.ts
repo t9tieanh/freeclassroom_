@@ -11,7 +11,9 @@ export class AuthDto {
   password: string
 }
 
+// payload cho jwt token
 export interface JwtPayloadDto {
+  userId: string
   username: string
   role: string
   tokenType: TokenType
