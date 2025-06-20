@@ -67,7 +67,6 @@ const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
 
     return (
         <>
-        
         <form id="registrationForm shadow-3" className="register-form" onSubmit={handleSubmit}>
             <div className="row m-4 text-center">
                 <div className="text-welcome">

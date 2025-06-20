@@ -1,12 +1,12 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { FaGem } from 'react-icons/fa';
 
-const SidebarComponent = () => {
+const SidebarComponent = ({className}) => {
     return (
         <>
-        <Sidebar backgroundColor="white">
+        <Sidebar backgroundColor={className}>
             <Menu>
-                <SubMenu label="Class Management" icon={<FaGem />}>
+                <SubMenu label='Class Management' icon={<FaGem />}>
                 <MenuItem> Add Class </MenuItem>
                 <MenuItem> Class List </MenuItem>
                 </SubMenu>

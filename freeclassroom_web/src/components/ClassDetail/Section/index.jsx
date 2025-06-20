@@ -1,12 +1,12 @@
 import SectionDetail from '../Post/index.jsx'
 import './style.scss'
 import { MdOutlinePlayLesson } from 'react-icons/md';
-import { getPostsBySectionId } from '../../../service/section/SectionService';
+import { getPostsBySectionId } from '../../../service/post/SectionService.js';
 import { useEffect, useState } from 'react';
 import Tag from '~/components/common/tag'
 import Card from '~/components/common/Card'
 
-const SectionComponent = ({index,section}) => {
+const SectionComponent = ({index, section}) => {
 
     const [posts, setPosts] = useState([])
 
@@ -20,12 +20,12 @@ const SectionComponent = ({index,section}) => {
 
     useEffect(() => {
         if (isOpenSection)
-            fetchPosts(section.id)
+            fetchPosts(section._id)
     }, [isOpenSection]);
 
 
-    const fetchPosts = async () => {
-        let data = await getPostsBySectionId(section.id)
+    const fetchPosts = async (sectionId) => {
+        let data = await getPostsBySectionId(sectionId)
 
         if (data && data.code && data.code === 200 && data.result) {
             setPosts(data.result)
@@ -35,7 +35,6 @@ const SectionComponent = ({index,section}) => {
     const handleOpenSection = () => {
         setIsOpenSection(!isOpenSection)
     }
-
 
     return (
         <>
