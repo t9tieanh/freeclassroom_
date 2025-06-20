@@ -46,11 +46,26 @@ const findClassRoomById = async (req: Request, res: Response) => {
   })
 }
 
+// lấy danh sách lớp học -> phân trang
+const getPaginatedClassRooms = async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1
+  const limit = parseInt(req.query.limit as string) || 4
+
+  const result = await classRoomService.getPaginatedClassRooms(page, limit)
+
+  sendResponse(res, {
+    code: StatusCodes.OK,
+    message: 'Lấy danh sách lớp học thành công!',
+    result
+  })
+}
+
 const classRoomController = {
   createClassroom,
   addSection,
   joinClassroom,
-  findClassRoomById
+  findClassRoomById,
+  getPaginatedClassRooms
 }
 
 export default classRoomController

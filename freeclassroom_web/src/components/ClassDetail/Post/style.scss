@@ -1,38 +1,38 @@
-.section-detail-container {
+// .section-detail-container {
 
-    border: none; 
-    box-shadow: 0 0 0 0.5px rgb(196, 194, 194) !important;
-    border-radius: 10px;
+//     border: none; 
+//     box-shadow: 0 0 0 0.5px rgb(196, 194, 194) !important;
+//     border-radius: 10px;
 
-    font-size: small;
+//     font-size: small;
 
-    .section-detail-title {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+//     .section-detail-title {
+//         &:hover {
+//             text-decoration: underline;
+//         }
+//     }
 
-    .content-container {
-        min-width: 700px !important;
-    }
+//     .content-container {
+//         min-width: 700px !important;
+//     }
     
 
-    .exercise-container {
+//     .exercise-container {
 
-        .exercise-description {
-            background-color: #dcdddf;
-            width: 70%;
-            padding: 10px !important;
-            border-radius: 10px;
-        }
-    }
+//         .exercise-description {
+//             background-color: #dcdddf;
+//             width: 70%;
+//             padding: 10px !important;
+//             border-radius: 10px;
+//         }
+//     }
     
-    p.lead.fw-normal.mb-2 {
-        color: rgb(17, 110, 163);
-    }
+//     p.lead.fw-normal.mb-2 {
+//         color: rgb(17, 110, 163);
+//     }
 
-    .card.section.p-3.section-detail-container {
-        padding: 0px
-    }
+//     .card.section.p-3.section-detail-container {
+//         padding: 0px
+//     }
 
-}
+// }

@@ -70,7 +70,7 @@ const findClassRoomById = async (classRoomId: string) => {
     _id: new mongoose.Types.ObjectId(classRoomId) as any
   }).populate({
     path: 'teacher',
-    select: 'name email image phone description position' 
+    select: 'name email image phone description position'
   })
 
   if (!classRoomData) throw new ApiError(StatusCodes.BAD_REQUEST, 'Phòng học không tồn tại !')
@@ -78,11 +78,37 @@ const findClassRoomById = async (classRoomId: string) => {
   return classRoomData
 }
 
+// lấy danh sách lớp học -> phân trang
+const getPaginatedClassRooms = async (page = 1, limit = 10) => {
+  const skip = (page - 1) * limit
+  // lấy từ dòng thứ skip
+
+  // query lấy classroom
+  const classRooms = await ClassroomModel.find()
+    .populate({
+      path: 'teacher',
+      select: 'name'
+    })
+    .skip(skip)
+    .limit(limit)
+    .select('name unit code image coverImage')
+
+  const totalItems = await ClassroomModel.countDocuments()
+
+  return {
+    currentPage: page,
+    totalPages: Math.ceil(totalItems / limit),
+    totalItems,
+    classRooms
+  }
+}
+
 const classRoomService = {
   createClassroom,
   addSection,
   joinClassroom,
-  findClassRoomById
+  findClassRoomById,
+  getPaginatedClassRooms
 }
 
 export default classRoomService

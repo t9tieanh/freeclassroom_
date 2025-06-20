@@ -8,6 +8,9 @@ import upload from '~/utils/multerUtil'
 
 const router = Router()
 
+// Lấy danh sách lớp học -> phân trang
+router.get('/', classRoomController.getPaginatedClassRooms)
+
 // Lấy thông tin của một lớp học
 router.get('/:id', classRoomController.findClassRoomById)
 

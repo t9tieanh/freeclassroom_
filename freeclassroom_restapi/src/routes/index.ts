@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 import AuthRouter from './auth.routes'
 import UserRouter from './user.routes'
 import ClassRoomRouter from './classroom.routes'
+import PostRouter from './post.routes'
 
 const IndexRouter: Router = express.Router()
 
@@ -15,4 +16,5 @@ IndexRouter.route('/status').get((req: Request, res: Response) => {
 IndexRouter.use('/auth', AuthRouter)
 IndexRouter.use('/users', UserRouter)
 IndexRouter.use('/classroom', ClassRoomRouter)
+IndexRouter.use('/post', PostRouter)
 export default IndexRouter
