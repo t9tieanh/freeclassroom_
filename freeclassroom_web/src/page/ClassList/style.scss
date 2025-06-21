@@ -1,3 +1,16 @@
 .classroom-list {
     height: 100vh !important;
+
+    .filter-result {
+        min-height: 50vh !important;
+    }
+
+    a.page-link {
+        font-size: 16px;
+    }
+
+    ul.pagination {
+        margin: 0px;
+        padding: 5px;
+    }
 }

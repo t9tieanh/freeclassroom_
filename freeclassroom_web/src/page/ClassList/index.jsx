@@ -2,19 +2,15 @@ import './style.scss'
 import Paginate from '../../components/common/paging/Paginate';
 import { useEffect, useState } from 'react';
 import { getClassRoomByTeacher } from '../../service/class/ClassRoomService';
-import { Link, useNavigate } from 'react-router-dom';
 import SideBar from '../../components/Teacher/SideBar';
 import ClassCard from '../../components/ClassList/ClassCard';
-import SearchInput from '../../components/ClassList/SearchInput';
-import Card from '~/components/common/Card'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FaFilter } from 'react-icons/fa';
 import Tag from '~/components/common/tag'
-
-export const LOCAL_HOST = 'http://localhost:8080/freeclassroom'
-export const LIMIT = 3
+import { pagingConfig } from '~/conf/conf';
+import CustomBreadcrumb from '~/components/common/Breadcrumb';
 
 const ClassList = () => {
 
@@ -24,7 +20,7 @@ const ClassList = () => {
     const [classQuantity, setClassQuantity] = useState(0)
 
     useEffect(() => {
-        fetchClassList(0, LIMIT)
+        fetchClassList(0, pagingConfig.LIMIT)
     }, []); // Dependency array rỗng -> chỉ chạy một lần khi component mount
 
     const fetchClassList = async(page, limit) => {
@@ -32,7 +28,7 @@ const ClassList = () => {
 
         if (data && data.code && data.code === 200 && data.result) {
             setClassLst(data.result.classRooms)
-            setCurrentPage(data.result.currentPage)
+            setCurrentPage(data.result.currentPage - 1)
             setClassQuantity(data.result.totalItems)
             setPageCount(data.result.totalPages)
         }
@@ -41,13 +37,13 @@ const ClassList = () => {
     
     return (
         <>
+        <CustomBreadcrumb className={'bg-light'} /> 
         <Row className='bg-light h-100 classroom-list'>
             <Col xs={2}>
                 <SideBar className={'wh-100'}  />
             </Col>
             <Col>
             <Container>
-                <SearchInput className={'mt-3'} /> 
                 {/* danh sách lớp học */}
                 <div className='filter-result mt-2'>
                     <Tag 
@@ -62,8 +58,8 @@ const ClassList = () => {
                     ))}
                 </div>
                 {/* phân trang */}
-                <nav className='paginate-container mt-4' aria-label='Page navigation'>
-                    <Paginate fetchClassList = {fetchClassList}  itemsPerPage = {LIMIT} pageCount = {pageCount} currentPage = {currentPage}/>
+                <nav className='d-flex align-items-center justify-content-center mt-5' aria-label='Page navigation'>
+                    <Paginate fetchClassList = {fetchClassList}  itemsPerPage = {pagingConfig.LIMIT} pageCount = {pageCount} currentPage = {currentPage}/>
                 </nav>
             </Container>
             </Col>

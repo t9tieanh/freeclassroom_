@@ -13,11 +13,13 @@ import VerifyOTP from './page/Auth/VerifyOtp/VerifyOtp';
 import ClassList from './page/ClassList/index.jsx';
 import ClassLayout from './layout/classdetail/index.jsx';
 import ClassDetail from './page/ClassDetail/index.jsx';
+import Post from './page/Post'
 
 import { ToastContainer } from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 import DefaultLayout from './layout/default/index.jsx';
 import Authentication from './page/Auth/GgAuthenticate/index.jsx';
+import PostLayout from './layout/post';
 
 
 const router = createBrowserRouter([
@@ -33,10 +35,17 @@ const router = createBrowserRouter([
         { path: 'verify-otp', element: <VerifyOTP /> },
         { path: 'class', element: <ClassList /> },
         {
-          path: 'class-detail',
+          path: 'class-detail/:classId',
           element: <ClassLayout />,
           children: [
-            { path: ':id', element: <ClassDetail /> },
+            { index: true, element: <ClassDetail /> },
+          ],
+        }, 
+        {
+          path: 'post',
+          element: <PostLayout />,
+          children: [
+            { path: ':postId', element: <Post /> }
           ],
         },  
       ]},

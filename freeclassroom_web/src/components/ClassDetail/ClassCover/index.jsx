@@ -2,11 +2,11 @@ import './style.scss'
 import { CiTimer } from 'react-icons/ci';
 import baseLogo from '~/assets/media/image.png'
 
-const ClassCover = ({name, cover}) => {
+const ClassCover = ({name, cover, className}) => {
 
     return (
         <>
-            <div class='card bg-dark text-white cover-class'>
+            <div class={`card bg-dark text-white cover-class ${className}`}>
                     <img
                         src={cover || baseLogo}
                         alt="Bìa của Lớp học"

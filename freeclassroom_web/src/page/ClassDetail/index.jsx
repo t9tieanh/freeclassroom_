@@ -8,14 +8,11 @@ import { ClassDetailContext } from '../../context/ClassDetailContext.jsx'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from '~/components/common/Card'
+import Breadcrumb from '~/components/common/Breadcrumb/index.jsx'
 
 const ClassDetail = () => {
-    const { id } = useParams();
-    const { classDetail, fetchClassDetail } = useContext(ClassDetailContext);
 
-    useEffect(() => {
-        fetchClassDetail(id)
-    }, []);
+    const { classDetail, fetchClassDetail } = useContext(ClassDetailContext);
 
     return <>
         <Row> 
@@ -30,7 +27,11 @@ const ClassDetail = () => {
                         <>
                         <div className='card text-center'>
                             <div className='card-header'>
-                                <NavBarComponent/>
+                                <Breadcrumb items={[
+                                        { name: 'Trang chủ', path: '/' },
+                                        { name: 'Lớp học của tôi', path: '/class' },
+                                        { name: 'Chi tiết lớp học', path: null }, // trang hiện tại
+                                    ]}/>
                             </div>
                             <div className='card-body'>
                                 {
