@@ -3,8 +3,8 @@ import React, {
   useEffect,
   useState
 } from "react";
-import ReactDOM from "react-dom";
-import { LIMIT } from "../../../page/Class/ClassList";
+
+import { pagingConfig } from "~/conf/conf";
 
 
 const Paginate = ({ fetchClassList,itemsPerPage, pageCount, currentPage}) => {
@@ -12,7 +12,7 @@ const Paginate = ({ fetchClassList,itemsPerPage, pageCount, currentPage}) => {
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     console.log(`User requested page number ${event.selected}`);
-    fetchClassList(event.selected,LIMIT)
+    fetchClassList(event.selected + 1, pagingConfig.LIMIT)
     // fetchtListUserWithPaginate(event.selected + 1);
   };
 

@@ -1,31 +1,32 @@
-import { Link } from "react-router-dom";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import './style.scss';
+import { Link } from 'react-router-dom';
 
-const Breadcrumb = ({ title, paths }) => {
-    return (
-        <div className="breadcrumb-section">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="breadcrumb-text">
-                            <h2>{title}</h2>
-                            <div className="bt-option">
-                                {paths.map((path, index) => (
-                                    <span key={index}>
-                                        {path.url ? (
-                                            <Link to={path.url}>{path.label}</Link>
-                                        ) : (
-                                            <span>{path.label}</span>
-                                        )}
-                                        {index < paths.length - 1 && " / "}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+const CustomBreadcrumb = ({ className = '', items = [] }) => {
+  const lastIndex = items.length - 1;
+
+  return (
+    <Breadcrumb className={`custom-bread-crumb p-3 bg-white ${className}`}>
+      {items.map((item, index) => {
+        const isLast = index === lastIndex;
+
+        // Nếu là item cuối hoặc không có path, coi là active
+        if (isLast || !item.path) {
+          return (
+            <Breadcrumb.Item key={index} active>
+              {item.name}
+            </Breadcrumb.Item>
+          );
+        }
+
+        return (
+          <Breadcrumb.Item key={index} linkAs={Link} linkProps={{ to: item.path }}>
+            {item.name}
+          </Breadcrumb.Item>
+        );
+      })}
+    </Breadcrumb>
+  );
 };
 
-export default Breadcrumb;
+export default CustomBreadcrumb;

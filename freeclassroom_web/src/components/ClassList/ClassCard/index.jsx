@@ -3,17 +3,20 @@ import PrimaryButton from "~/components/common/button/btn-primary";
 import { HiPaperAirplane } from "react-icons/hi2";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { MdClass } from "react-icons/md";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import './style.scss'
 
 const ClassCard = ({classroom, index}) => {
     return (
         <>
-        <Row className="mt-2 hover-shadow p-2 rounded-4">
+        <Row className="mt-2 hover-shadow p-2 rounded-4 class-card">
             <Col xs={2}>
                 <img 
                     src={`${classroom?.coverImage}`} 
                     alt={`Ảnh của ${classroom?.coverImage}`} 
                     className="img-fluid"
-                    style={{ width: '100%', height: '120px', objectFit: 'cover' }} 
+                    style={{ width: '100%', height: '140px', objectFit: 'cover' }} 
                 />
             </Col>
             <Col xs={8}>
@@ -22,15 +25,11 @@ const ClassCard = ({classroom, index}) => {
                     <ul className="list-unstyled mb-0">
                         <li className="mb-1">
                             <i className="zmdi zmdi-pin me-2 text-muted"></i>
-                            {classroom?.unit}
+                            <MdClass /> Chủ đề: {classroom?.unit}
                         </li>
                         <li className="mb-1">
                             <i className="zmdi zmdi-account me-2 text-muted"></i>
-                            {classroom?.teacher?.name}
-                        </li>
-                        <li>
-                            <i className="zmdi zmdi-time me-2 text-muted"></i>
-                            {classroom?.code}
+                            <FaChalkboardTeacher /> Giáo viên: {classroom?.teacher?.name}
                         </li>
                     </ul>
                 </div>

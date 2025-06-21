@@ -5,9 +5,21 @@ import './style.scss';
 import { useState } from 'react';
 import { getClassDetail } from '../../service/class/ClassRoomService.js';
 import { ClassDetailContext } from '../../context/ClassDetailContext.jsx';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ClassLayout = () => {
+
+    // dùng use param để lấy classId
+    const { classId } = useParams();
+
+    useEffect(() => {
+        fetchClassDetail(classId)
+    }, []);
+
     const [classDetail, setClassDetail] = useState();
+
+    // lấy dữ liệu classroom
     const fetchClassDetail = async (id) => {
         let data = await getClassDetail(id)
         
@@ -17,7 +29,7 @@ const ClassLayout = () => {
     }
 
     return (
-        <div className='row p-3'>
+        <div>
             <ClassCover name = {classDetail?.name} cover={classDetail?.coverImage} />
             <ClassDetailContext.Provider value={{classDetail, fetchClassDetail}}>
                 <Outlet/>

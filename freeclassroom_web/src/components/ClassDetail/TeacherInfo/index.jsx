@@ -2,12 +2,12 @@ import './style.scss'
 import Card from '~/components/common/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { FaInfoCircle } from "react-icons/fa";
-import { CiUser } from "react-icons/ci";
-import { FaCodeBranch } from "react-icons/fa";
-import { MdAttachEmail } from "react-icons/md";
-import { FaPhone } from "react-icons/fa";
+import { FaChalkboardTeacher } from 'react-icons/fa';
+import { FaInfoCircle } from 'react-icons/fa';
+import { CiUser } from 'react-icons/ci';
+import { FaCodeBranch } from 'react-icons/fa';
+import { MdAttachEmail } from 'react-icons/md';
+import { FaPhone } from 'react-icons/fa';
 
 const TeacherInfo = ({teacher}) => {
     return (
@@ -16,17 +16,17 @@ const TeacherInfo = ({teacher}) => {
                 <Col xs={3} >
                     <Card icon={<FaChalkboardTeacher />} className={'text-muted'} name={'Giáo viên'}
                         children={   
-                            <div className="text-center border-end">
+                            <div className='text-center border-end'>
                                 <img
                                     src={`${teacher?.image}`}
-                                    className="img-fluid avatar-xxl rounded-circle"
-                                    referrerpolicy="no-referrer"
-                                    alt="User Avatar"
+                                    className='img-fluid avatar-xxl rounded-circle'
+                                    referrerpolicy='no-referrer'
+                                    alt='User Avatar'
                                 />
-                                <h4 className="text-primary font-size-20 mt-3 mb-2">
+                                <h4 className='text-primary font-size-20 mt-3 mb-2'>
                                     {teacher?.name}
                                 </h4>
-                                <h5 className="text-muted font-size-13 mb-0">{teacher?.position}</h5>
+                                <h5 className='text-muted font-size-13 mb-0'>{teacher?.position}</h5>
                             </div>
                         }   
                     />

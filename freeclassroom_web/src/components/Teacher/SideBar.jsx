@@ -6,7 +6,7 @@ const SidebarComponent = ({className}) => {
         <>
         <Sidebar backgroundColor={className}>
             <Menu>
-                <SubMenu label='Class Management' icon={<FaGem />}>
+                <SubMenu label='@Free Class Room' icon={<FaGem />}>
                 <MenuItem> Add Class </MenuItem>
                 <MenuItem> Class List </MenuItem>
                 </SubMenu>
