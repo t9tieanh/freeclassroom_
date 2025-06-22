@@ -2,10 +2,11 @@ import express from 'express'
 import 'reflect-metadata'
 import cors from 'cors'
 import { corsOptions } from '~/config/cors'
-import CONNECT_DB from '~/config/mongodb'
+import { CONNECT_DATABASES } from './config/connect'
 import { env } from '~/config/env'
 import router from '~/routes/index'
 import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
+import Redis from './config/redis'
 
 const START_SERVER = async () => {
   const app = express()
@@ -32,7 +33,8 @@ const START_SERVER = async () => {
   })
 }
 
-CONNECT_DB()
+
+CONNECT_DATABASES()
   .then(() => console.log('Database connected successfully'))
   .then(() => START_SERVER())
   .catch((err) => {

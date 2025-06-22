@@ -16,5 +16,9 @@ export const env = {
   FRONTEND_ORIGIN: (process.env.FRONTEND_ORIGIN as string) || '',
   CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
-  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || ''
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
+  REDIS_HOST: process.env.REDIS_HOST || '',
+  REDIS_PORT: process.env.REDIS_PORT || 18831,
+  REDIS_USERNAME: process.env.REDIS_USERNAME,
+  REDIS_PASSWORD: process.env.REDIS_PASSWORD
 }
