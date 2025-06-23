@@ -1,155 +1,174 @@
-import React, { useState, useEffect } from "react";
-import  "./style.scss";
+import React, { useState } from 'react';
+import  './style.scss';
 import { toast } from 'react-toastify';
-import { activeGGAccount } from "../../../service/ggAuth/GoogleAuthentionService";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import TextInput from '~/components/common/Input/Input2'
+import { signUp } from '~/service/auth/AuthenticationService';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import TextInput from '~/components/common/Input/Input2';
+import { Row, Col } from "react-bootstrap";
+import PrimaryButton from '~/components/common/button/btn-primary';
+import { FaGoogle } from "react-icons/fa";
+import { HiPaperAirplane } from "react-icons/hi2";
+import { doSavePendingUserName } from "~/redux/action/verifyOtpAction";
 
-const RegisterForm = ({ name, email, imgUrl , setImgUrl }) => {
 
-    const [username, setUsername] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [role, setRole] = useState("TEACHER");
+const RegisterForm = () => {
+    
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [role, setRole] = useState('TEACHER');
     const [file, setFile] = useState(null);
+    const [imgUrl, setImgUrl] = useState(
+        'https://i.pinimg.com/236x/e6/60/85/e66085932a4b3b411854aff54574ecd6.jpg'
+    );
+    const [isLoadingVerify, setIsLoadingVerify] = useState(false);
 
-    const navigator = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const [isLoadingVerify,setIsLoadingVerify] = useState(false)
+    const handleUpdateImage = (e) => {
+        setImgUrl(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0])
+    }
 
-    // Hàm tải ảnh từ imgUrl và chuyển thành File
-    const convertImageUrlToFile = async (url) => {
-        try {
-            const response = await fetch(url, { mode: 'cors' });
-            const blob = await response.blob();
-            const file = new File([blob], `profile-image${new Date().getTime}.jpg`, { type: 'image/jpeg' });
-            setFile(file)
-        } catch (error) {
-            console.error("Lỗi khi chuyển đổi ảnh:", error);
-        }
-    };
-
-    useEffect(() => {
-        if (imgUrl) {
-        convertImageUrlToFile(imgUrl);
-        }
-    }, [imgUrl]);
-
-
-    // tiến hành active account
     const handleSubmit = async(e) => {
         e.preventDefault();
         
         if (password !== confirmPassword){
-            toast.error("Mật khẩu không trùng khớp !");
+            toast.error('Mật khẩu không trùng khớp !');
             return
         }
 
         setIsLoadingVerify(true)
 
-        const data = await activeGGAccount(file, email, name, phone, username, password, role)
+        const data = await signUp(file, email, name, phone, username, password, role).catch(e => toast.error(e.message))
+        console.log(data)
 
         setIsLoadingVerify(false)
 
-        if (data && data.code && data.code === 200) {
+        if (data && data.code && data.code === 201) {
+            // console.log(data?.result?.username)
+            dispatch(doSavePendingUserName(data?.result))
             toast.success(data?.message)
-            navigator("/login")
-        } else if (data.response && data.response.data) {
-            console.log(data)
+            navigate('/verify-otp')
+        }
+        else if (data.response && data.response.data) {
             toast.error(data.response.data.message)
         } else toast.error(data?.message)
-
     };
+    
+    
+    return <>
 
-
-
-    return (
-        <>
-        <form id="registrationForm shadow-3" className="register-form" onSubmit={handleSubmit}>
-            <div className="row m-4 text-center">
-                <div className="text-welcome">
-                    <h2 class="mb-4">Continue registration</h2>
-                    <p class="mb-0" >Hello @{name} welcome to freeClasroom.</p>
-                </div>
-
-                <div className="w-100"></div>
-                <div className="col-4 mx-auto " style={{ marginTop: "15px", marginBottom: "15px" }}>
-                    <img
-                        src={imgUrl}
-                        referrerpolicy="no-referrer"
-                        className="img-responsive product-img" alt="Image" 
-                    />
-                </div>
-                <h3 className="mb-1 text-center ">{name}</h3>
-            </div>
-
-            <div className="row">
-                <div className="col-md-6 mb-4">
-                    <TextInput name={'Username'} 
-                        placeholder={'Nhập username'} value={username}
-                        setValue={setUsername} 
-                    />
-                </div>
-                <div className="col-md-6">
-                    <TextInput name={'Số điện thoại'} 
-                        placeholder={'Nhập số điện thoại'} value={phone}
-                        setValue={setPhone} 
-                    />
-                </div>
-            </div>
-
-
-            <TextInput name={'Mật khẩu'} 
-                placeholder={'Nhập mật khẩu'} value={password}
-                inputType={'password'}
-                setValue={setPassword} 
-            />
-
-            <TextInput name={'Xác nhận mật khẩu'} 
-                inputType={'password'}
-                placeholder={'Nhập lại mật khẩu'} value={confirmPassword}
-                setValue={setConfirmPassword} 
-            />
-
-            <div className="btn-group mb-4 mt-4">
+    <form id='registrationForm' onSubmit={handleSubmit}>
+        <Row>
+            <Col xs={8}>
                 <input
-                    type="radio"
-                    className='btn-check'
-                    name="role"
-                    id="teacher"
-                    value="TEACHER"
-                    checked={role === "TEACHER"}
-                    onChange={() => {setRole('TEACHER')}}
+                    name='fileUpload'
+                    type='file'
+                    className='form-control'
+                    accept='image/*'
+                    onChange={handleUpdateImage}
                 />
-                <label className="btn btn-secondary" htmlFor="teacher">
-                    Teacher
-                </label>
-
-                <input
-                    type="radio"
-                    className='btn-check'
-                    name="role"
-                    id="student"
-                    value="STUDENT"
-                    checked={role === "STUDENT"}
-                    onChange={() => {setRole('STUDENT')}}
+            </Col>
+            <Col className='col-6' style={{ marginTop: '15px', marginBottom: '15px' }}>
+                <img
+                    src={imgUrl}
+                    className='img-responsive product-img'
+                    alt='Product Preview'
                 />
-                <label className="btn btn-secondary" htmlFor="student">
-                    Student
-                </label>
-            </div>
+            </Col>
+        </Row>
 
-            <button type="submit" className="btn btn-primary btn-block mb-4">
-                {isLoadingVerify && <i class="fa-solid fa-spinner loaderIcon" style={{marginRight:"10px"}}> </i>} 
-                Sign up
-            </button>
-        </form>
-        
-        
-        </>
-    )
+        <Row>
+            <Col xs={6}>
+                <TextInput value={username} setValue={setUsername}   
+                    name={'Username'} placeholder={'Vui lòng nhập username'}
+                    type={'text'}
+                />
+            </Col>
+            <Col>
+                <TextInput value={email} setValue={setEmail}   
+                    name={'Email'} placeholder={'Vui lòng nhập email'}
+                    type={'email'}
+                />
+            </Col>
+        </Row>
+
+        <Row>
+            <Col xs={6}>
+                <TextInput value={name} setValue={setName}   
+                    name={'Tên của bạn'} placeholder={'Vui lòng nhập tên của bạn'}
+                    type={'text'}
+                />
+            </Col>
+            <Col>
+                <TextInput value={phone} setValue={setPhone}   
+                    name={'Số điện thoại'} placeholder={'Vui lòng nhập số điện thoại của bạn !'}
+                    type={'tel'}
+                />
+            </Col>
+        </Row>
+
+        <TextInput value={password} setValue={setPassword}   
+            name={'Mật khẩu'} placeholder={'Nhập mật khẩu'}
+            type={'password'}
+        />
+
+        <TextInput value={confirmPassword} setValue={setConfirmPassword}   
+            name={'Xác nhận mật khẩu'} placeholder={'Xác nhận lại mật khẩu'}
+            type={'password'}
+        />
+
+        <div className='btn-group mb-4 mt-4'>
+            <input
+                type='radio'
+                className='btn-check'
+                name='role'
+                id='teacher'
+                value='TEACHER'
+                checked={role === 'TEACHER'}
+                onChange={() => {setRole('TEACHER')}}
+            />
+            <label className='btn btn-secondary' htmlFor='teacher'>
+                Teacher
+            </label>
+
+            <input
+                type='radio'
+                className='btn-check'
+                name='role'
+                id='student'
+                value='STUDENT'
+                checked={role === 'STUDENT'}
+                onChange={() => {setRole('STUDENT')}}
+            />
+            <label className='btn btn-secondary' htmlFor='student'>
+                Student
+            </label>
+        </div>
+
+        <PrimaryButton text ={
+                <>
+                {isLoadingVerify && <i class='fa-solid fa-spinner loaderIcon' style={{marginRight:'10px'}}> </i>} 
+                Đăng ký
+                </>
+            }
+            icon={<HiPaperAirplane/>}
+            className={'btn btn-primary btn-block mb-4'} 
+        />
+
+        <div className='text-center'>
+            <p>Hoặc đăng ký bằng: </p>
+            <FaGoogle onClick={() => {navigate('/login')}} />
+        </div>
+    </form>
+    
+    </>
 }
 
-export default RegisterForm;
+export default RegisterForm

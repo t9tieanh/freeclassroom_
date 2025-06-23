@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import { FaFilter } from 'react-icons/fa';
 import Tag from '~/components/common/tag'
 import { pagingConfig } from '~/conf/conf';
-import CustomBreadcrumb from '~/components/common/Breadcrumb';
+import Breadcrumb from '~/components/common/Breadcrumb';
 
 const ClassList = () => {
 
@@ -37,7 +37,10 @@ const ClassList = () => {
     
     return (
         <>
-        <CustomBreadcrumb className={'bg-light'} /> 
+        <Breadcrumb items={[
+            { name: 'Trang chủ', path: '/' },
+            { name: 'Lớp học của tôi', path: null },
+        ]}/>
         <Row className='bg-light h-100 classroom-list'>
             <Col xs={2}>
                 <SideBar className={'wh-100'}  />

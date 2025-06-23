@@ -5,7 +5,7 @@ const baseURL = "auth/"
 
 const signUp = async (image, email, name, phone, username, password, role) => {
     const form = new FormData();
-    form.append('imageFile', image);
+    form.append('image', image);
     form.append('email', email);
     form.append('name',name)
     form.append('phone',phone)
@@ -13,12 +13,16 @@ const signUp = async (image, email, name, phone, username, password, role) => {
     form.append('password', password);
     form.append('role', role);
 
-    return await axios.post(`${baseURL}sign-up`, form)
+    return await axios.post(`users/sign-up`, form)
 }
 
 
 const verifyOTPfunc = async (username, otp) => {
-    return await axios.post(`${baseURL}verify-otp`, {username, otp})
+    const form = new FormData();
+    form.append('username', username);
+    form.append('otp', otp);
+
+    return await axios.post(`users/active-account`, form)
 }
 
 const login = async (username, password) => {

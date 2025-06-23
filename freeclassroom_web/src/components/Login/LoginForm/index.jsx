@@ -40,8 +40,6 @@ const LoginForm = () => {
       const targetUrl = `${authUrl}?redirect_uri=${encodeURIComponent(
         callbackUrl
       )}&response_type=code&client_id=${googleClientId}&scope=openid%20email%20profile`;
-  
-      console.log(targetUrl);
 
       window.location.href = targetUrl;
     } catch (error) {
@@ -68,7 +66,6 @@ const LoginForm = () => {
       }, 2000);
 
     } else if (data.response && data.response.data) {
-      console.log(data)
       toast.error(data.response.data.message)
     } else toast.error(data?.message)
   }
@@ -94,10 +91,21 @@ const LoginForm = () => {
               </div>
 
               {/* Email Input */}
-              <TextInput name={'Email'} setValue={setUsername} value={username} placeholder={'Nhập username của bạn =))'}/>
+              <TextInput 
+                name={'Email'} 
+                setValue={setUsername} 
+                value={username} 
+                placeholder={'Nhập username của bạn =))'}
+                type={'email'}
+              />
 
               {/* Password Input */}
-              <TextInput name={'Mật khẩu'} setValue={setPassword} value={password} placeholder={'Nhập password của bạn =))'} />
+              <TextInput name={'Mật khẩu'} 
+                setValue={setPassword} 
+                value={password} 
+                placeholder={'Nhập password của bạn =))'} 
+                type={'password'}
+              />
 
               {/* Remember Me & Forgot Password */}
               <div className='d-flex justify-content-between align-items-center mt-3'>

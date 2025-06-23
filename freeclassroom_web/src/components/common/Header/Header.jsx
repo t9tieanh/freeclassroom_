@@ -37,7 +37,7 @@ const Header = () => {
                 <div className="row align-items-center">
                 <ul className="navbar-nav ml-auto" style={{width: "fit-content"}}>
                   <Tag className={'bg-gradient shadow-5 p-2 text-dark rounded-2 fw-bold'}>
-                      welcome to {account.username}
+                      welcome to {account.name}
                       <img
                           src={account.image}
                           referrerPolicy="no-referrer"
@@ -73,7 +73,7 @@ const Header = () => {
 
               <ul className="navbar-nav ml-auto " style={{width: "fit-content"}}>
 
-                <Tag text={'Chào mừng đến với FreeClassRoom'} className={'bg-light shadow-3 p-2 text-primary rounded-2'}  />
+                <Tag children={'Chào mừng đến với FreeClassRoom'} className={'bg-light shadow-3 p-2 text-dark rounded-2 text-muted'}  />
 
                 <CustomButton variant={'light'} 
                   className={'text-primary ml-3'} text={'Đăng ký'} 

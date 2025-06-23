@@ -1,16 +1,17 @@
 
-import {  UPDATE_USER } from "../action/updateUserAction";
-import { DeleteUser } from "../action/updateUserAction";
-import { UPDATE_TOKEN } from "../action/updateToken";
+import {  UPDATE_USER } from '../action/updateUserAction';
+import { DeleteUser } from '../action/updateUserAction';
+import { UPDATE_TOKEN } from '../action/updateToken';
 
 const INITIAL_STATE = {
     account : {
-        accessToken: "",
-        refreshToken : "",
-        username: "",
-        image: "",
-        email: "",
-        role: "",
+        accessToken: '',
+        refreshToken : '',
+        username: '',
+        image: '',
+        email: '',
+        role: '',
+        name:''
     },
     isAuthentication : false
 };
@@ -26,8 +27,9 @@ const updateUserReducer = (state = INITIAL_STATE, action) => {
                     email : action.payload.email, 
                     image : action.payload.image,
                     role : action.payload.role, 
+                    name : action.payload.name, 
                 }, 
-                isAuthentication : action.payload.isValid
+                isAuthentication : action.payload.valid
             };
         
         case DeleteUser: 

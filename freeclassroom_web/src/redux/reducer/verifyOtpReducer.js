@@ -1,21 +1,18 @@
 
-import { SAVE_OTP, doSaveOtp } from "../action/verifyOtpAction";
-import VerifyOTP from "../../page/Auth/VerifyOtp/VerifyOtp";
+import { PENDING_USERNAME } from '../action/verifyOtpAction';
 
 const INITIAL_STATE = {
-    username : ''
+    username : null,
+    expireDateTime : null,
 };
 
 const verifyOtpReducer = (state = INITIAL_STATE, action) => {
+    
     switch (action.type) {
-        case SAVE_OTP:
+        case PENDING_USERNAME: 
             return {
-                ...state, username : action?.payload,
-            };
-
-        case VerifyOTP : 
-            return {
-                ...state, username : '',
+                ...state, username : action?.payload.username,
+                expireDateTime : new Date(action?.payload?.expireDateTime),
             };
         
         default: return state;

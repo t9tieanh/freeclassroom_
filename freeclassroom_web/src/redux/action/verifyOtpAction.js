@@ -1,15 +1,8 @@
-export const SAVE_OTP = 'SAVE_OTP';
-export const Verify_OTP = 'VERIFY_OTP'
+export const PENDING_USERNAME = 'PENDING_USERNAME';
 
-export const doSaveOtp = (data) => {
+export const doSavePendingUserName = (data) => {
     return {
-        type: SAVE_OTP,
+        type: PENDING_USERNAME,
         payload: data
-    };
-};
-
-export const doVerify_OTP = () => {
-    return {
-        type: Verify_OTP
     };
 };

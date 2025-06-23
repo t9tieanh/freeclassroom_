@@ -1,14 +1,14 @@
 import './style.scss'
 import React from "react";
 
-const TextInput = ({value, setValue, placeholder, name, onChangeFunc, overlayElement, className, inputType, idInput, height}) => {
+const TextInput = ({value, setValue, placeholder, name, onChangeFunc, overlayElement, className, type, idInput, height}) => {
 
   return (
     <div className={`text-input-2 ${className}`} >
       <label htmlFor={idInput}>{name}</label>
       <input
         className="date-input"
-        type={inputType ? inputType : 'text'}
+        type={type ? type : 'text'}
         id={idInput}
         value={value}
         placeholder={placeholder}
