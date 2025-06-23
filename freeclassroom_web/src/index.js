@@ -8,7 +8,7 @@ import { store, persistor } from './redux/store';
 import App from './App';
 import HomePage from './page/HomePage/Home';
 import Login from './page/Auth/Login/Login';
-import Register from './page/Auth/Register/Register';
+import Register from './page/Register/Register';
 import VerifyOTP from './page/Auth/VerifyOtp/VerifyOtp';
 import ClassList from './page/ClassList/index.jsx';
 import ClassLayout from './layout/classdetail/index.jsx';
@@ -20,6 +20,7 @@ import reportWebVitals from './reportWebVitals';
 import DefaultLayout from './layout/default/index.jsx';
 import Authentication from './page/Auth/GgAuthenticate/index.jsx';
 import PostLayout from './layout/post';
+import PrivateVerifyOtpRoute from './routes/PrivateVerifyOtpRoute';
 
 
 const router = createBrowserRouter([
@@ -32,7 +33,6 @@ const router = createBrowserRouter([
         { path: 'login', element: <Login /> },
         { path: 'authentication', element: <Authentication /> },
         { path: 'register', element: <Register /> },
-        { path: 'verify-otp', element: <VerifyOTP /> },
         { path: 'class', element: <ClassList /> },
         {
           path: 'class-detail/:classId',
@@ -47,7 +47,8 @@ const router = createBrowserRouter([
           children: [
             { path: ':postId', element: <Post /> }
           ],
-        },  
+        }, 
+        { path: 'verify-otp', element: <PrivateVerifyOtpRoute children={<VerifyOTP />} /> }, 
       ]},
     ],
   },

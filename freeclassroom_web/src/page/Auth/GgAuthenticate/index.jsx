@@ -5,7 +5,7 @@ import { exchangeToken } from "../../../service/ggAuth/GoogleAuthentionService";
 import { useDispatch } from "react-redux";
 import { doUpdateUser } from "../../../redux/action/updateUserAction";
 import './style.scss';
-import RegisterForm from "../../../components/RegisterPage/RegisterForm";
+import RegisterForm from "../../../components/RegisterPage/OAuth2RegisterForm";
 import { data } from "jquery";
 import { set } from "nprogress";
 import { toast } from "react-toastify";
@@ -40,7 +40,7 @@ const AuthenticationPage = () => {
     
                 if (data && data.code && data.code === 200 && data?.result) {
                     setIsLoading(false);
-                    if (data.result.isValid) {
+                    if (data.result.valid) {
                         // Xử lý cho người dùng cũ (đã có tài khoản)
                         toast.success(data.message)
                         dispatch(doUpdateUser(data.result))
