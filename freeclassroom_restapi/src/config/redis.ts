@@ -25,13 +25,13 @@ const CONNECT_REDIS_DB = async (): Promise<RedisClientType> => {
   return redisClient
 }
 
-const GetRedisClient = () => {
+const getRedisClient = () => {
   if (!redisClient) throw new Error('Redis not connect !')
   return redisClient
 }
 
 const Redis = {
-  GetRedisClient,
+  getRedisClient,
   CONNECT_REDIS_DB
 }
 
