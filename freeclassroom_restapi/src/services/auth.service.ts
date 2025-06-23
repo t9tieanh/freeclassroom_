@@ -41,6 +41,8 @@ const login = async (request: AuthDto) => {
     username: user.username,
     email: user.email,
     role: user.role,
+    image: user.image,
+    name: user.name,
     valid: true
   }
 }

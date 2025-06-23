@@ -6,7 +6,6 @@ import { CONNECT_DATABASES } from './config/connect'
 import { env } from '~/config/env'
 import router from '~/routes/index'
 import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
-import Redis from './config/redis'
 
 const START_SERVER = async () => {
   const app = express()
@@ -32,7 +31,6 @@ const START_SERVER = async () => {
     console.log(`Hello , I am running at ${hostname}:${port}/`)
   })
 }
-
 
 CONNECT_DATABASES()
   .then(() => console.log('Database connected successfully'))

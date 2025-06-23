@@ -22,8 +22,14 @@ const getProfile = async (req: Request, res: Response) => {
   })
 }
 
+// activeAccount
 const activeAccount = async (req: Request, res: Response) => {
-  const result = await UserService.activeAccount(req.data)
+  let result
+
+  if (req.data.otp) {
+    result = await UserService.activateByOtp(req.data)
+  } else result = await UserService.activeAccount(req.data)
+
   sendResponse(res, {
     code: StatusCodes.OK,
     message: 'Đăng ký tài khoản thành công, vui lòng đăng nhập lại !',

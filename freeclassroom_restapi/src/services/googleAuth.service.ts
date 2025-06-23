@@ -96,7 +96,7 @@ const loginGoogle = async ({ code }: { code: string }) => {
 
   // trường hợp user đã onboard vào hệ thống -> trả thêm token
   return {
-    isValid: true,
+    valid: true,
     email: user.email,
     name: user.name,
     role: user.role,
