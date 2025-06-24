@@ -51,6 +51,6 @@ export class OTPUtil {
    * Trả về Date hết hạn dựa trên createdAt
    */
   static getExpireDateTime(otp: OtpDto): Date {
-    return new Date(otp.createdAt.getTime() + this.OTP_TTL_SECONDS * 1000);
+    return new Date(otp.createdAt.getTime() + this.OTP_TTL_SECONDS * 1000)
   }
 }

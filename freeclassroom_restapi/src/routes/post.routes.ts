@@ -8,7 +8,10 @@ import { CreationPostDto } from '~/dto/request/post.dto'
 const router = Router()
 
 // lấy dữ liệu bài viết theo section
-router.get('/:id', PostController.getPostsBySection)
+router.get('/section/:id', PostController.getPostsBySection)
+
+// lấy dữ liệu bài viết theo section
+router.get('/:id', PostController.findPostById)
 
 // tạo bài viết
 router.post('/', [authenticate, isTeacher, validateDto(CreationPostDto)], PostController.createPost)

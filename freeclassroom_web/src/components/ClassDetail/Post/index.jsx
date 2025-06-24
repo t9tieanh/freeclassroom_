@@ -4,8 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './style.scss'
 import PrimaryButton from '~/components/common/button/btn-primary';
+import { HiPaperAirplane } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom';
 
 const SectionDetail = ({post}) => {
+
+    const navigate = useNavigate()
+
     return (
         <>
             <Container>
@@ -25,16 +30,17 @@ const SectionDetail = ({post}) => {
                             children={
                                 <>
                                 <div className='text-muted fs-8'>
-                                    {post?.content} 
+                                    {post?.description} 
                                 </div>
                                 </>
                             }
                         />
                     </Col>
-                    <Col>
-                        <PrimaryButton text={'Chi tiết'} />
+                    <Col className='d-flex align-items-center'>
+                        <PrimaryButton onClickFunc={() => {navigate(`/post/${post._id}`)}} text={'Chi tiết'} icon={<HiPaperAirplane />} />
                     </Col>
                 </Row>
+                <hr/>
             </Container>
             
         </>

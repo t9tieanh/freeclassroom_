@@ -12,7 +12,8 @@ import Register from './page/Register/Register';
 import VerifyOTP from './page/Auth/VerifyOtp/VerifyOtp';
 import ClassList from './page/ClassList/index.jsx';
 import ClassLayout from './layout/classdetail/index.jsx';
-import ClassDetail from './page/ClassDetail/index.jsx';
+import ClassDetail from './page/ClassDetailPage/ClassDetail/index.jsx';
+import PeopleClassDetail from './page/ClassDetailPage/Peoples';
 import Post from './page/Post'
 
 import { ToastContainer } from 'react-toastify';
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           element: <ClassLayout />,
           children: [
             { index: true, element: <ClassDetail /> },
+            { path: 'peoples', element: <PeopleClassDetail /> }
           ],
         }, 
         {

@@ -22,9 +22,18 @@ const getPostsBySection = async (req: Request, res: Response, next: NextFunction
   })
 }
 
+const findPostById = async (req: Request, res: Response, next: NextFunction) => {
+  sendResponse(res, {
+    code: StatusCodes.OK,
+    message: 'Lấy thông tin bài đăng thành công !',
+    result: await PostService.findPostById(req.params.id)
+  })
+}
+
 const PostController = {
   createPost,
-  getPostsBySection
+  getPostsBySection,
+  findPostById
 }
 
 export default PostController

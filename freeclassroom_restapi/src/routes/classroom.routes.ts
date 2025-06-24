@@ -11,6 +11,9 @@ const router = Router()
 // Lấy danh sách lớp học -> phân trang
 router.get('/', classRoomController.getPaginatedClassRooms)
 
+// lấy danh sách people
+router.get('/:id/peoples', classRoomController.getPeoplesByClassRoom)
+
 // Lấy thông tin của một lớp học
 router.get('/:id', classRoomController.findClassRoomById)
 

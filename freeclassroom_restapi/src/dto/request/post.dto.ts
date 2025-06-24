@@ -11,5 +11,8 @@ export class CreationPostDto {
   postType: PostType
 
   @IsString()
+  description?: string
+
+  @IsString()
   sectionId: string
 }
