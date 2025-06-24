@@ -20,5 +20,7 @@ export const env = {
   REDIS_HOST: process.env.REDIS_HOST || '',
   REDIS_PORT: process.env.REDIS_PORT || 18831,
   REDIS_USERNAME: process.env.REDIS_USERNAME,
-  REDIS_PASSWORD: process.env.REDIS_PASSWORD
+  REDIS_PASSWORD: process.env.REDIS_PASSWORD,
+  GMAIL_USER: process.env.GMAIL_USER || 'phama9162@gmail.com',
+  GMAIL_PASS: process.env.GMAIL_PASS || 'doi la the thoi - phu le'
 }
