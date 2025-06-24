@@ -60,12 +60,21 @@ const getPaginatedClassRooms = async (req: Request, res: Response) => {
   })
 }
 
+const getPeoplesByClassRoom = async (req: Request, res: Response) => {
+  sendResponse(res, {
+    code: StatusCodes.OK,
+    message: 'Lấy thông tin lớp học thành công !',
+    result: await classRoomService.getPeoplesByClassRoom(req.params.id)
+  })
+}
+
 const classRoomController = {
   createClassroom,
   addSection,
   joinClassroom,
   findClassRoomById,
-  getPaginatedClassRooms
+  getPaginatedClassRooms,
+  getPeoplesByClassRoom
 }
 
 export default classRoomController

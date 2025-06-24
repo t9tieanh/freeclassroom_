@@ -10,7 +10,7 @@ import PrimaryButton from '~/components/common/button/btn-primary';
 import { FaGoogle } from "react-icons/fa";
 import { HiPaperAirplane } from "react-icons/hi2";
 import { doSavePendingUserName } from "~/redux/action/verifyOtpAction";
-
+import LoaderIcon from '~/components/common/Icon/LoaderIcon';
 
 const RegisterForm = () => {
     
@@ -154,7 +154,7 @@ const RegisterForm = () => {
 
         <PrimaryButton text ={
                 <>
-                {isLoadingVerify && <i class='fa-solid fa-spinner loaderIcon' style={{marginRight:'10px'}}> </i>} 
+                {isLoadingVerify && <LoaderIcon />} 
                 Đăng ký
                 </>
             }

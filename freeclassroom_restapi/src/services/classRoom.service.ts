@@ -103,12 +103,25 @@ const getPaginatedClassRooms = async (page = 1, limit = 10) => {
   }
 }
 
+// lấy danh sách người tham gia lớp học
+const getPeoplesByClassRoom = async (classRoomId: string) => {
+  const classRoom = await ClassroomModel.findOne({
+    _id: new mongoose.Types.ObjectId(classRoomId) as any
+  }).populate({
+    path: 'students',
+    select: 'name email image phone'
+  })
+
+  return classRoom?.students
+}
+
 const classRoomService = {
   createClassroom,
   addSection,
   joinClassroom,
   findClassRoomById,
-  getPaginatedClassRooms
+  getPaginatedClassRooms,
+  getPeoplesByClassRoom
 }
 
 export default classRoomService

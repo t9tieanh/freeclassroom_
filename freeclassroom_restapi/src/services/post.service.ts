@@ -1,7 +1,6 @@
 import { Types } from 'mongoose'
 import { JwtPayloadDto } from '~/dto/request'
 import { CreationPostDto } from '~/dto/request/post.dto'
-import { PostType } from '~/enums/post.enum'
 import { PostModel } from '~/models'
 
 const createPost = async (newPostDto: CreationPostDto, user: JwtPayloadDto) => {
@@ -22,9 +21,18 @@ const getPostsBySection = async (sectionId: string) => {
   return posts
 }
 
+const findPostById = async (postId: string) => {
+  const post = await PostModel.findOne({
+    _id: new Types.ObjectId(postId)
+  }).populate('createBy', 'email name image -_id')
+
+  return post
+}
+
 const PostService = {
   createPost,
-  getPostsBySection
+  getPostsBySection,
+  findPostById
 }
 
 export default PostService

@@ -8,10 +8,9 @@ const CustomBreadcrumb = ({ className = '', items = [] }) => {
   return (
     <Breadcrumb className={`custom-bread-crumb p-3 bg-white ${className}`}>
       {items.map((item, index) => {
-        const isLast = index === lastIndex;
 
         // Nếu là item cuối hoặc không có path, coi là active
-        if (isLast || !item.path) {
+        if (!item.path) {
           return (
             <Breadcrumb.Item key={index} active>
               {item.name}

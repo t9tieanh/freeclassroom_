@@ -3,8 +3,6 @@ import './style.scss'
 import { MdOutlinePlayLesson } from 'react-icons/md';
 import { getPostsBySectionId } from '../../../service/post/SectionService.js';
 import { useEffect, useState } from 'react';
-import Tag from '~/components/common/tag'
-import Card from '~/components/common/Card'
 
 const SectionComponent = ({index, section}) => {
 
@@ -24,6 +22,7 @@ const SectionComponent = ({index, section}) => {
     }, [isOpenSection]);
 
 
+    // gọi api lấy dữ liệu bài viết có trong section
     const fetchPosts = async (sectionId) => {
         let data = await getPostsBySectionId(sectionId)
 
@@ -69,11 +68,7 @@ const SectionComponent = ({index, section}) => {
             </div>
             </div>
         </div>
-
         </div>
-        
-
-        
         </>
     )
 }

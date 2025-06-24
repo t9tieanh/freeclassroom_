@@ -7,6 +7,8 @@ import { UserRole, UserStatus } from '~/enums/user.enum'
 import imageService from './image.service'
 import Redis from '~/config/redis'
 import { OTPUtil, OtpDto } from '~/utils/OTPUtil'
+import NotificationService from './notification.service'
+import { NotificationType } from '~/enums/notification.enum'
 
 const signUp = async (request: CreationUserDto) => {
   const isExisted = await UserModel.exists({
@@ -47,6 +49,16 @@ const signUp = async (request: CreationUserDto) => {
   // lưu otp vào redis
   const client = Redis.getRedisClient()
   await client.set(`otp:${result.username}`, JSON.stringify(otp), { EX: OTPUtil.OTP_TTL_SECONDS })
+
+  // thực hiện gửi email xác thực
+  await NotificationService.send({
+    type: NotificationType.VERIFY_OTP,
+    data: {
+      email: result.email,
+      name: result.name,
+      otp: otp.code
+    }
+  })
 
   return {
     email: result.email,

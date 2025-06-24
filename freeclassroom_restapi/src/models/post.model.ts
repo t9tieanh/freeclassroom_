@@ -7,6 +7,7 @@ export interface PostDoc extends Document {
   title: string
   content?: string
   postType: PostType
+  description?: string
   sectionId: Types.ObjectId
   createBy: UserDoc
   isModified(path: string): boolean
@@ -20,6 +21,7 @@ const PostSchema: Schema = new Schema({
     enum: Object.keys(PostType)
   },
   sectionId: { type: Schema.Types.ObjectId },
+  description: { type: String },
   createBy: { type: Schema.Types.ObjectId, ref: 'User' },
   createDate: { type: Date, default: Date.now }
 }).set('toJSON', {

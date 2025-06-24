@@ -11,7 +11,7 @@ import CheckBox from '~/components/common/Checkbox';
 import PrimaryButton from '~/components/common/button/btn-primary';
 import { FaGoogle } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { data } from 'jquery';
+import LoaderIcon from '~/components/common/Icon/LoaderIcon';
 
 
 const LoginForm = () => {
@@ -73,7 +73,7 @@ const LoginForm = () => {
 
     return (<>
     
-    <form onSubmit={(e) => {handleLogin(e)}}>
+    <form className='login-form' onSubmit={(e) => {handleLogin(e)}}>
               {/* Social Login */}
               <div className='d-flex flex-row align-items-center justify-content-center justify-content-lg-start'>
                 <p className='lead fw-normal mb-0 me-3'>Sign in with</p>
@@ -125,7 +125,7 @@ const LoginForm = () => {
               <div className='text-center text-lg-start mt-4 pt-2'>
                   <PrimaryButton className={'btn btn-primary btn-lg'} text={'Đăng nhập'} 
                     onClickFunc={handleLogin}
-                    children={<i class='fa-solid fa-spinner loaderIcon' style={{marginLeft:'10px'}}> </i>}
+                    children={<>{isLoading && <LoaderIcon />} </>}
                   />
                 <p className='small fw-bold mt-2 pt-1 mb-0'>
                   Don't have an account?{' '}
