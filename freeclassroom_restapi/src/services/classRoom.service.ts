@@ -4,7 +4,9 @@ import imageService from './image.service'
 import { CreationSectionDto } from '~/dto/request'
 import ApiError from '~/middleware/ApiError'
 import { StatusCodes } from 'http-status-codes'
-import mongoose from 'mongoose'
+import mongoose, { isValidObjectId } from 'mongoose'
+import Redis from '~/config/redis'
+import { CLASSROOM_CACHE, NOTFOUND_CACHE } from '~/utils/constants'
 
 const createClassroom = async (newClassRoomDto: CreationClassroomDto, teacherId: string) => {
   // Check code
@@ -28,6 +30,7 @@ const createClassroom = async (newClassRoomDto: CreationClassroomDto, teacherId:
 }
 
 // thêm section -> chapter cho từng class
+// cập nhật lại cache
 const addSection = async (newSection: CreationSectionDto, teacherId: string) => {
   const updatedClassRoom = await ClassroomModel.findOne({
     teacher: teacherId,
@@ -35,6 +38,12 @@ const addSection = async (newSection: CreationSectionDto, teacherId: string) => 
   })
 
   if (!updatedClassRoom) throw new ApiError(StatusCodes.BAD_REQUEST, 'Không tìm thấy lớp hợp lệ !')
+
+  // trước khi update data -> tiến hành xóa cache
+  const client = Redis.getRedisClient()
+  await client.del(`${CLASSROOM_CACHE}${newSection.classRoomId}`).catch(() => {
+    throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Đang có lỗi với server redis !')
+  })
 
   updatedClassRoom.sections?.push({
     title: newSection.title,
@@ -64,16 +73,41 @@ const joinClassroom = async (joinRequest: JoinClassroomDto, studentId: string) =
   return await updatedClassRoom.save()
 }
 
-// lấy thông tin từng lớp học
+// lấy thông tin từng lớp học -> caching with redis
 const findClassRoomById = async (classRoomId: string) => {
-  const classRoomData = await ClassroomModel.findOne({
+  // validate
+  if (!isValidObjectId(classRoomId)) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Phòng học không tồn tại !')
+  }
+
+  // tìm trong cache -> lấy redis
+  const client = Redis.getRedisClient()
+  const keyCache = `${CLASSROOM_CACHE}${classRoomId}`
+
+  // tìm trong cache
+  let classRoomData: any = await client.get(keyCache)
+
+  // nếu có trong cache
+  if (classRoomData) return JSON.parse(classRoomData)
+
+  // nếu không có
+  classRoomData = await ClassroomModel.findOne({
     _id: new mongoose.Types.ObjectId(classRoomId) as any
   }).populate({
     path: 'teacher',
     select: 'name email image phone description position'
   })
 
-  if (!classRoomData) throw new ApiError(StatusCodes.BAD_REQUEST, 'Phòng học không tồn tại !')
+  if (!classRoomData) {
+    classRoomData = NOTFOUND_CACHE
+  }
+
+  // set lại vào cache ( không có trong database vẫn set cái này lại cho cache )
+  await client.set(keyCache, JSON.stringify(classRoomData), {
+    EX: 1800 // thời gian sống là 30 phút
+  })
+
+  // nếu không có trong database
 
   return classRoomData
 }
