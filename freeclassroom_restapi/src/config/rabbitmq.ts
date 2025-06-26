@@ -1,5 +1,8 @@
 import amqp, { Channel } from 'amqplib'
 import { env } from '~/config/env'
+import { QueueNameEnum } from '~/enums/rabbitQueue.enum'
+import NotificationService from '~/services/notification.service'
+import { NewSectionNotificationDto, NotificationDto } from '~/dto/request/notification.dto'
 
 const RabbitMQConf = {
   protocol: 'amqp',
@@ -29,12 +32,31 @@ class RabbitClient {
     return RabbitClient.instance
   }
 
-  // Tạo kết nối và channel
+  // Tạo kết nối và channel -> đăng ký consumer để lắng nghe data trên queue
   private static async createConnection(): Promise<void> {
     try {
       const uri = `${RabbitMQConf.protocol}://${RabbitMQConf.username}:${RabbitMQConf.password}@${RabbitMQConf.hostname}:${RabbitMQConf.port}${RabbitMQConf.vhost}`
       RabbitClient.connection = await amqp.connect(uri)
       RabbitClient.channel = await RabbitClient.connection.createChannel()
+
+      // đăng ký consume cho notification service
+      RabbitClient.channel?.consume(QueueNameEnum.CLASSROOM_NOTIFICATION, async (data) => {
+        if (!data) return
+
+        try {
+          const parsed: NewSectionNotificationDto = JSON.parse(data.content.toString())
+
+          // send với
+          await NotificationService.send(parsed)
+
+          RabbitClient.channel?.ack(data) // xác nhận xử lý xong
+        } catch (err) {
+          console.error('Lỗi xử lý notification message:', err)
+          // gọi nack để retry
+          RabbitClient.channel?.nack(data, false, true)
+        }
+      })
+
       console.log('Connection to RabbitMQ established')
     } catch (error) {
       console.error('RabbitMQ connection failed:', error)
@@ -42,7 +64,7 @@ class RabbitClient {
   }
 
   // Gửi message tới queue
-  public static async sendMessage(data: any, queueName: string): Promise<boolean> {
+  public static async sendMessage(data: NotificationDto, queueName: QueueNameEnum): Promise<boolean> {
     try {
       if (!RabbitClient.channel) {
         throw new Error('RabbitMQ channel is not initialized')

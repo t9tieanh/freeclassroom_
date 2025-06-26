@@ -17,7 +17,7 @@ export interface ClassroomDoc extends Document {
   tags?: Tag[]
   sections?: SectionDoc[]
   teacher?: UserDoc
-  students?: ObjectId[]
+  students?: UserDoc[]
   isModified(path: string): boolean
 }
 

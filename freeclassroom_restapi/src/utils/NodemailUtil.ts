@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 // Interface cho options gửi mail
 export interface SendEmailOptions {
-  to: string
+  to: string[]
   subject: string
   text?: string
   html?: string

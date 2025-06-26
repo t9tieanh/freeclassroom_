@@ -9,8 +9,15 @@ import { QueueNameEnum } from '~/enums/rabbitQueue.enum'
 
 const IndexRouter: Router = express.Router()
 
+const data = {
+  email: ['student01@example.com', '22110282@student.hcmute.edu.vn'],
+  name: 'Nguyễn Văn A',
+  className: 'Lập trình Node.js cơ bản',
+  sectionName: 'Giới thiệu về Express.js'
+}
+
 IndexRouter.route('/status').get(async (req: Request, res: Response) => {
-  await RabbitClient.sendMessage('hello i am phamtienanh', QueueNameEnum.CLASSROOM_NOTIFICATION)
+  await RabbitClient.sendMessage(data, QueueNameEnum.CLASSROOM_NOTIFICATION)
 
   res.status(StatusCodes.OK).json({
     message: 'Status Ok, Welcome to the Board API Home'
