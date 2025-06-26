@@ -4,6 +4,11 @@ import { CreationPostDto } from '~/dto/request/post.dto'
 import { PostModel } from '~/models'
 import Redis from '~/config/redis'
 import { NOTFOUND_CACHE, POST_CACHE } from '~/utils/constants'
+import { ClassroomModel } from '~/models'
+import RabbitClient from '~/config/rabbitmq'
+import { QueueNameEnum } from '~/enums/rabbitQueue.enum'
+import { NotificationType } from '~/enums/notification.enum'
+import { NotificationDto } from '~/dto/request/notification.dto'
 
 const createPost = async (newPostDto: CreationPostDto, user: JwtPayloadDto) => {
   const newPost = new PostModel({
@@ -12,7 +17,31 @@ const createPost = async (newPostDto: CreationPostDto, user: JwtPayloadDto) => {
     sectionId: new Types.ObjectId(newPostDto.sectionId)
   })
 
-  return await newPost.save()
+  const savedPost = await newPost.save()
+
+  // tiến hành gửi message cho rabbit mq
+  // để notification service gửi thông báo đến cho các thành viên trong lớp học
+  if (savedPost.sectionId) {
+    const updatedclassRoom = await ClassroomModel.findOne({
+      'sections._id': { $in: savedPost.sectionId }
+    }).populate('students', 'email -_id')
+
+    if (updatedclassRoom) {
+      // tiến hành gửi message tới rabbit mq
+      await RabbitClient.sendMessage(
+        {
+          type: NotificationType.NEW_POST,
+          email: updatedclassRoom.students?.map((student) => student.email) || [],
+          title: NotificationType.NEW_POST,
+          className: updatedclassRoom.name,
+          postTitle: savedPost.title
+        } as NotificationDto,
+        QueueNameEnum.CLASSROOM_NOTIFICATION
+      )
+    }
+  }
+
+  return savedPost
 }
 
 const getPostsBySection = async (sectionId: string) => {

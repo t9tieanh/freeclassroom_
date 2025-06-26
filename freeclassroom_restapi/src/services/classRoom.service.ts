@@ -7,6 +7,10 @@ import { StatusCodes } from 'http-status-codes'
 import mongoose, { isValidObjectId } from 'mongoose'
 import Redis from '~/config/redis'
 import { CLASSROOM_CACHE, NOTFOUND_CACHE } from '~/utils/constants'
+import RabbitClient from '~/config/rabbitmq'
+import { QueueNameEnum } from '~/enums/rabbitQueue.enum'
+import { NotificationType } from '~/enums/notification.enum'
+import { NotificationDto } from '~/dto/request/notification.dto'
 
 const createClassroom = async (newClassRoomDto: CreationClassroomDto, teacherId: string) => {
   // Check code
@@ -35,6 +39,9 @@ const addSection = async (newSection: CreationSectionDto, teacherId: string) => 
   const updatedClassRoom = await ClassroomModel.findOne({
     teacher: teacherId,
     _id: newSection.classRoomId
+  }).populate({
+    path: 'students',
+    select: 'email -_id'
   })
 
   if (!updatedClassRoom) throw new ApiError(StatusCodes.BAD_REQUEST, 'Không tìm thấy lớp hợp lệ !')
@@ -52,7 +59,22 @@ const addSection = async (newSection: CreationSectionDto, teacherId: string) => 
     emphasized: newSection.emphasized
   })
 
-  return await updatedClassRoom.save()
+  const savedClassRoom = await updatedClassRoom.save()
+
+  // sau khi add thành công section
+  // -> gửi thông báo lên message queue (rabbit mq) cho notification service -> thông báo cho các thành viên trong lớp
+  await RabbitClient.sendMessage(
+    {
+      type: NotificationType.NEW_SECTION,
+      email: updatedClassRoom.students?.map((student) => student.toString()) || [],
+      title: NotificationType.NEW_SECTION,
+      className: updatedClassRoom.name,
+      sectionName: newSection.title
+    } as NotificationDto,
+    QueueNameEnum.CLASSROOM_NOTIFICATION
+  )
+
+  return savedClassRoom
 }
 
 const joinClassroom = async (joinRequest: JoinClassroomDto, studentId: string) => {
