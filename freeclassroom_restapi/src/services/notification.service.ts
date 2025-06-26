@@ -26,8 +26,8 @@ const send = async (notification: NotificationDto): Promise<void> => {
     case NotificationType.NEW_POST:
       subject = NotificationType.NEW_POST
       to = data.email
-      templateName = 'welcome-email.html'
-      templateData = { name: data.name }
+      templateName = 'notification-newsection.html'
+      templateData = { name: data.name, className: data.className, sectionName: data.sectionName }
       break
 
     // Thêm các loại khác nếu cần

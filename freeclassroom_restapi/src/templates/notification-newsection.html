@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thông báo Section mới</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background-color: #f7f9fc;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 480px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+      }
+
+      .title {
+        font-size: 20px;
+        color: #333333;
+        margin-bottom: 16px;
+      }
+
+      .section-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1d4e8f;
+        background-color: #e6f0ff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        display: inline-block;
+        margin: 20px 0;
+      }
+
+      .footer {
+        font-size: 12px;
+        color: #999999;
+        margin-top: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2 class="title">Xin chào {{name}},</h2>
+
+      <p>Giáo viên của lớp <strong>{{className}}</strong> vừa thêm một section mới.</p>
+
+      <div class="section-name">{{sectionName}}</div>
+
+      <p>Bạn hãy truy cập vào lớp để xem nội dung mới và hoàn thành các bài học sớm nhất có thể.</p>
+
+      <div class="footer">
+        © 2025 FreeClassRoom - dev by PhamTienAnh. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>
