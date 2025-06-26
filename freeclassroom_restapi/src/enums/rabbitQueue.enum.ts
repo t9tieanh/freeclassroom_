@@ -1,0 +1,3 @@
+export enum QueueNameEnum {
+  CLASSROOM_NOTIFICATION = 'CLASSROOM_NOTIFICATION'
+}

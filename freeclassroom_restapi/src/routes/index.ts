@@ -4,10 +4,14 @@ import AuthRouter from './auth.routes'
 import UserRouter from './user.routes'
 import ClassRoomRouter from './classroom.routes'
 import PostRouter from './post.routes'
+import RabbitClient from '~/config/rabbitmq'
+import { QueueNameEnum } from '~/enums/rabbitQueue.enum'
 
 const IndexRouter: Router = express.Router()
 
-IndexRouter.route('/status').get((req: Request, res: Response) => {
+IndexRouter.route('/status').get(async (req: Request, res: Response) => {
+  await RabbitClient.sendMessage('hello i am phamtienanh', QueueNameEnum.CLASSROOM_NOTIFICATION)
+
   res.status(StatusCodes.OK).json({
     message: 'Status Ok, Welcome to the Board API Home'
   })
