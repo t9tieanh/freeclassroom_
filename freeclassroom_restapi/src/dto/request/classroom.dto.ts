@@ -1,6 +1,6 @@
 import { IsString, IsOptional, IsNotEmpty, IsArray, ValidateNested, IsUrl } from 'class-validator'
 import { Type } from 'class-transformer'
-import singleImageUploadDto from './SingleImageUpload.dto'
+import singleImageUploadDto from './singleImageUpload.dto'
 
 class TagDto {
   @IsString()
