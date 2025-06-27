@@ -23,7 +23,7 @@ const send = async (notification: NotificationDto): Promise<void> => {
       subject = NotificationType.VERIFY_OTP
       to.push(...otpNotification.email)
       templateName = 'otp-email.html'
-      templateData = { notification: otpNotification.title, otp: otpNotification.otp }
+      templateData = { name: otpNotification.title, otp: otpNotification.otp }
       break
 
     case NotificationType.NEW_SECTION:

@@ -9,6 +9,7 @@ import Redis from '~/config/redis'
 import { OTPUtil, OtpDto } from '~/utils/OTPUtil'
 import NotificationService from './notification.service'
 import { NotificationType } from '~/enums/notification.enum'
+import { NotificationDto } from '~/dto/request/notification.dto'
 
 const signUp = async (request: CreationUserDto) => {
   const isExisted = await UserModel.exists({
@@ -53,12 +54,10 @@ const signUp = async (request: CreationUserDto) => {
   // thực hiện gửi email xác thực
   await NotificationService.send({
     type: NotificationType.VERIFY_OTP,
-    data: {
-      email: result.email,
-      name: result.name,
-      otp: otp.code
-    }
-  })
+    email: [result.email],
+    title: result.name,
+    otp: otp.code
+  } as NotificationDto)
 
   return {
     email: result.email,

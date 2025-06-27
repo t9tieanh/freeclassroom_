@@ -7,11 +7,11 @@ const SidebarComponent = ({className}) => {
         <Sidebar backgroundColor={className}>
             <Menu>
                 <SubMenu label='@Free Class Room' icon={<FaGem />}>
-                <MenuItem> Add Class </MenuItem>
+                <MenuItem> Tìm kiếm thêm </MenuItem>
                 <MenuItem> Class List </MenuItem>
                 </SubMenu>
-                <MenuItem> Documentation </MenuItem>
-                <MenuItem> Calendar </MenuItem>
+                <MenuItem> Tìm kiếm thêm </MenuItem>
+                <MenuItem> Lọc thêm </MenuItem>
             </Menu>
         </Sidebar>
         </>
