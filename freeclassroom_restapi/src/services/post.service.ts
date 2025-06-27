@@ -60,7 +60,7 @@ const findPostById = async (postId: string) => {
   let post: any = await client.get(keyCache)
 
   // -> cache hit
-  if (post) return post
+  if (post) return JSON.parse(post)
 
   post = await PostModel.findOne({
     _id: new Types.ObjectId(postId)

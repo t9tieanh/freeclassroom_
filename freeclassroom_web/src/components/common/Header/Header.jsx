@@ -37,7 +37,7 @@ const Header = () => {
                 <div className="row align-items-center">
                 <ul className="navbar-nav ml-auto" style={{width: "fit-content"}}>
                   <Tag className={'bg-gradient shadow-5 p-2 text-dark rounded-2 fw-bold'}>
-                      welcome to {account.name}
+                      Xin chào {account.name}
                       <img
                           src={account.image}
                           referrerPolicy="no-referrer"
