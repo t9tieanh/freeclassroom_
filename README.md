@@ -191,6 +191,11 @@ Dive into the details of each class, including instructor, description, and cour
   ![Class Detail Screenshot](./screenshots/class-detail.png)
   ![Class Detail Screenshot](./screenshots/class-detail1.png)
   ![Class Detail Screenshot](./screenshots/class-detail2.png)
+
+- **Screenshots (List People in ClassRoom)**:
+  ![Class Detail Screenshot](./screenshots/people.png)
+  ![Class Detail Screenshot](./screenshots/people1.png)
+
 - **Description**: Rich presentation of class information with enrollment options and student count.
 
 ### 🧾 Post Detail View
