@@ -57,11 +57,14 @@ A dynamic and secure open learning platform developed as a personal fullstack pr
 freeclassroom/
 ├── freeclassroom_restapi/                  # backend
 │   ├── src/
+│    ├── Dockerfile
 │
 ├── freeclassroom_web/                      # frontend
 │   ├── src/
+│   ├── Dockerfile
 │
 └── README.md
+└── docker-compose.yml
 ```
 
 ---
@@ -70,7 +73,9 @@ freeclassroom/
 
 ## 🚀 Getting Started
 
-To run the project locally, follow these steps:
+### Running Locally
+
+To run the project locally without Docker, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
@@ -101,7 +106,34 @@ To run the project locally, follow these steps:
 5. **Access Application**:
    Visit `http://localhost:3000` in your browser.
 
----
+### Running with Docker Compose
+
+To run the project using Docker Compose, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/t9tieanh/freeclassroom_
+   cd FreeClassRoom
+   ```
+
+2. **Set Up Environment Variables**:
+   - Create `freeclassroom_restapi/.env` files for backend services (MongoDB URI, Redis, JWT secret, OAuth credentials, etc.)
+
+3. **Ensure Docker and Docker Compose are Installed**:
+   - Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) if not already installed.
+
+4. **Run Docker Compose**:
+   ```bash
+   docker-compose up -d
+   ```
+
+5. **Access Application**:
+   Visit `http://localhost:3000` in your browser.
+
+6. **Stop the Application**:
+   ```bash
+   docker-compose down
+   ```
 
 ## 🧪 Technical Highlights
 
