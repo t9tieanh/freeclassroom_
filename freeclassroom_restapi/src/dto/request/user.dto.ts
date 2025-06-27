@@ -1,6 +1,6 @@
 import { UserStatus, UserRole } from '~/enums/user.enum'
 import { IsEmail, IsString, IsNotEmpty, IsEnum, MinLength, IsOptional } from 'class-validator'
-import SingleImageUploadDto from './SingleImageUpload.dto'
+import SingleImageUploadDto from './singleImageUpload.dto'
 
 export default class CreationUserDto extends SingleImageUploadDto {
   @IsEmail({}, { message: 'Email không hợp lệ' })

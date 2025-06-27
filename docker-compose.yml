@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: ./freeclassroom_restapi 
+      dockerfile: Dockerfile
+    container_name: freeclassroom-backend
+    ports:
+      - "8017:8017"
+    env_file:
+      - ./freeclassroom_restapi/.env
+    depends_on:
+      - mongo
+      - redis
+      - rabbitmq
+
+  web:
+    build:
+      context: ./freeclassroom_web  
+      dockerfile: Dockerfile
+    container_name: freeclassroom_web
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
+
+  mongo:
+    image: mongo:6
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "37017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"  
+
+volumes:
+  mongo_data:
+
+networks:
+  backend:
+    driver: bridge
