@@ -40,8 +40,6 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
-    command: >
-      --requirepass ${REDIS_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:3-management

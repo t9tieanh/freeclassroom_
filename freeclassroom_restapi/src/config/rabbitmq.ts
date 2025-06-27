@@ -39,8 +39,14 @@ class RabbitClient {
       RabbitClient.connection = await amqp.connect(uri)
       RabbitClient.channel = await RabbitClient.connection.createChannel()
 
+      // Đảm bảo queue tồn tại
+      if (!RabbitClient.channel) {
+        throw new Error('RabbitMQ channel is not initialized')
+      }
+      await RabbitClient.channel.assertQueue(QueueNameEnum.CLASSROOM_NOTIFICATION, { durable: true })
+
       // đăng ký consume cho notification service
-      RabbitClient.channel?.consume(QueueNameEnum.CLASSROOM_NOTIFICATION, async (data) => {
+      RabbitClient.channel.consume(QueueNameEnum.CLASSROOM_NOTIFICATION, async (data) => {
         if (!data) return
 
         try {
