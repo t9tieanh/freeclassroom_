@@ -1,5 +1,24 @@
 
-# 📚 FreeClassRoom – Open Learning Platform
+# 👨‍💻 FreeClassRoom – Open Learning Platform
+
+<p align="center">
+  <a href="/">
+    <img alt="Node" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/1200px-Node.js_logo_2015.svg.png" height=50 width=186/>
+  </a>
+  <a href="/">
+    <img alt="TypeScript" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Typescript.svg/1200px-Typescript.svg.png" height=50 width=58/>
+  </a>
+  <a href="/">
+    <img alt="MongoDB" src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-2.svg" height=50 width=58/>
+  </a>
+  <a href="/">
+    <img alt="Redis" src = "https://vutruso.com/wp-content/uploads/2023/06/redis.svg" height=50 width=58>
+  </a>
+  <a href="/">
+    <img alt="RabbitMQ" src = "https://upload.wikimedia.org/wikipedia/commons/7/71/RabbitMQ_logo.svg" height=50 width=318>
+  </a>
+</p>
+<br>
 
 A dynamic and secure open learning platform developed as a personal fullstack project since **June 10, 2025**. FreeClassRoom empowers users to create and join online courses, engage in discussions, and share knowledge seamlessly.
 
@@ -31,18 +50,36 @@ A dynamic and secure open learning platform developed as a personal fullstack pr
 
 ---
 
+
+## 📂 Cấu trúc thư mục
+
+```
+freeclassroom/
+├── freeclassroom_restapi/                  # backend
+│   ├── src/
+│
+├── freeclassroom_web/                      # frontend
+│   ├── src/
+│
+└── README.md
+```
+
+---
+
+
+
 ## 🚀 Getting Started
 
 To run the project locally, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/FreeClassRoom
+   git clone https://github.com/t9tieanh/freeclassroom_
    cd FreeClassRoom
    ```
 
 2. **Set Up Environment Variables**:
-   - Create `.env` files for backend services (MongoDB URI, Redis, JWT secret, OAuth credentials, etc.)
+   - Create `freeclassroom_restapi/.env` files for backend services (MongoDB URI, Redis, JWT secret, OAuth credentials, etc.)
 
 3. **Install Dependencies**:
    ```bash
@@ -52,12 +89,13 @@ To run the project locally, follow these steps:
 4. **Run Development Servers**:
    - Backend:
      ```bash
+     cd freeclassroom_restapi
      npm run dev
      ```
    - Frontend:
      ```bash
-     cd client
-     npm start
+     cd freeclassroom_web
+     npm run start
      ```
 
 5. **Access Application**:
