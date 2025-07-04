@@ -6,29 +6,34 @@ import { CONNECT_DATABASES } from './config/connect'
 import { env } from '~/config/env'
 import router from '~/routes/index'
 import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
+import Socket from './config/socket'
+import http from 'http'
 
 const START_SERVER = async () => {
   const app = express()
 
   // config cors
   app.use(cors(corsOptions))
-
-  // thêm một middleware để phân tích cú pháp JSON trong body của reques
   app.use(express.json())
 
-  const hostname: string = env.APP_HOST
-  const port: number = Number(env.APP_PORT)
-
+  // import routes
   app.use('/v1', router)
 
-  // import routes
-  app.use(router)
-
-  // Middleware xử lý lỗi tập trung
+  // Middleware xử lý lỗi
   app.use(errorHandlingMiddleware)
 
-  app.listen(port, hostname, () => {
-    console.log(`Hello , I am running at ${hostname}:${port}/`)
+  // tạo server duy nhất
+  const server = http.createServer(app)
+
+  // config socket
+  Socket.setupSocket(server)
+
+  // start listen
+  const hostname = env.APP_HOST
+  const port = Number(env.APP_PORT)
+
+  server.listen(port, hostname, () => {
+    console.log(`Hello, I am running at ${hostname}:${port}/`)
   })
 }
 

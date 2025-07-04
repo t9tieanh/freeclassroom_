@@ -66,6 +66,7 @@ class RabbitClient {
       console.log('Connection to RabbitMQ established')
     } catch (error) {
       console.error('RabbitMQ connection failed:', error)
+      throw new Error('RabbitMQ connection failed')
     }
   }
 
