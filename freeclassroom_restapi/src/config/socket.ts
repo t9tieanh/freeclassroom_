@@ -12,6 +12,9 @@ function setupSocket(server: Server) {
     socket.on('disconnect', () => {
       console.log('User disconnected:', socket.id)
     })
+
+    io?.emit('server_message', 'helloo i am server')
+    io?.emit('server_message', 'helloo i am server')
   })
 
   console.log('Socket connected')

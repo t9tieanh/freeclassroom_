@@ -171,13 +171,23 @@ const getPeoplesByClassRoom = async (classRoomId: string) => {
   return classRoom?.students
 }
 
+// check xem user có trong lớp học hay không
+const checkPeopleInClassRoom = async (userId: string, classroomId: string) => {
+  const isExisted = await ClassroomModel.exists({
+    _id: classroomId,
+    students: userId
+  })
+  return !!isExisted
+}
+
 const classRoomService = {
   createClassroom,
   addSection,
   joinClassroom,
   findClassRoomById,
   getPaginatedClassRooms,
-  getPeoplesByClassRoom
+  getPeoplesByClassRoom,
+  checkPeopleInClassRoom
 }
 
 export default classRoomService
