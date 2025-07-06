@@ -8,6 +8,7 @@ import router from '~/routes/index'
 import { errorHandlingMiddleware } from '~/middleware/error-handler.midleware'
 import Socket from './config/socket'
 import http from 'http'
+import classRoomSocketService from './services/classroom.socket.service'
 
 const START_SERVER = async () => {
   const app = express()
@@ -17,7 +18,7 @@ const START_SERVER = async () => {
   app.use(express.json())
 
   // import routes
-  app.use('/v1', router)
+  app.use(router)
 
   // Middleware xử lý lỗi
   app.use(errorHandlingMiddleware)
@@ -27,6 +28,9 @@ const START_SERVER = async () => {
 
   // config socket
   Socket.setupSocket(server)
+
+  // tạo namespace socket classroom
+  classRoomSocketService.handlerConnection()
 
   // start listen
   const hostname = env.APP_HOST

@@ -16,5 +16,5 @@
     "strictPropertyInitialization": false, // Cho phép các thuộc tính không được khởi tạo trong constructor
   },
   //"files": ["src/global.d.ts"], // Các file dùng để defined global type cho dự án
-  "include": ["src/**/*"] // Đường dẫn include cho các file cần build
+  "include": ["src/**/*", "src/middleware/authentication/.socket.midleware.ts"] // Đường dẫn include cho các file cần build
 }
