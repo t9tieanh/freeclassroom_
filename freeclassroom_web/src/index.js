@@ -14,6 +14,7 @@ import ClassList from './page/ClassList/index.jsx';
 import ClassLayout from './layout/classdetail/index.jsx';
 import ClassDetail from './page/ClassDetailPage/ClassDetail/index.jsx';
 import PeopleClassDetail from './page/ClassDetailPage/Peoples';
+import ChatPage from './page/ClassDetailPage/Chat';
 import Post from './page/Post'
 
 import { ToastContainer } from 'react-toastify';
@@ -40,7 +41,8 @@ const router = createBrowserRouter([
           element: <ClassLayout />,
           children: [
             { index: true, element: <ClassDetail /> },
-            { path: 'peoples', element: <PeopleClassDetail /> }
+            { path: 'peoples', element: <PeopleClassDetail /> },
+            { path: 'chat', element: <ChatPage /> }
           ],
         }, 
         {

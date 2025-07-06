@@ -1,0 +1,18 @@
+.message-container {
+    .message-content {
+        max-width: 700px;
+        font-size: 15px;
+        padding: 12px;
+        white-space: normal;
+        word-wrap: break-word; 
+        font-weight: 100;
+    }
+
+    .send-date {
+        font-size: small;
+    }
+
+    .bg-light {
+        background-color: rgb(228, 230, 233) !important;
+    }
+}
