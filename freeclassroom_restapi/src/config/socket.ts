@@ -14,7 +14,6 @@ function setupSocket(server: Server) {
     })
 
     io?.emit('server_message', 'helloo i am server')
-    io?.emit('server_message', 'helloo i am server')
   })
 
   console.log('Socket connected')
