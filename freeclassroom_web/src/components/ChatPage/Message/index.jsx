@@ -1,21 +1,24 @@
 import './style.scss'
 import { Badge } from 'react-bootstrap'
 
-const Message = ({isOwn}) => {
+const Message = ({isOwn, message}) => {
     return <>
         <div 
             className={`message-container d-flex ${isOwn ? 'flex-row-reverse' : 'flex-row'} 
             justify-content-start mt-3 gap-2`}>
                 
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+            <img src={message?.sender?.avatarUrl}
                 alt="avatar 1" width={40} height={40}></img>
 
             <div>
+                <p className='send-date mb-0'>
+                    {message?.sender.name} - {message?.sender.username}
+                </p>
                 <Badge bg={isOwn ? 'primary' : 'light'} className={`message-content text-start ${!isOwn && 'text-black'}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum saepe facilis, dolorum minus fugiat, qui deleniti natus a dicta similique consectetur enim, atque quasi velit nemo expedita labore. Doloremque, distinctio.
+                    {message?.content}
                 </Badge>
                 <p className='send-date'>
-                    12:00 PM | Aug 13
+                    {message?.sendDate}
                 </p>
             </div>
 

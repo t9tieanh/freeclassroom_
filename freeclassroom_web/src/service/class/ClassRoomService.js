@@ -19,4 +19,8 @@ const getPeoplesByClassRoom = async (id) => {
     return await axios.get(`${baseURL}/${id}/peoples`)
 }
 
-export {getClassRoomByTeacher, getClassDetail, getPeoplesByClassRoom}
+const getChatHistory = async (id) => {
+    return await axios.get(`${baseURL}/${id}/chat`)
+}
+
+export {getClassRoomByTeacher, getClassDetail, getPeoplesByClassRoom, getChatHistory}

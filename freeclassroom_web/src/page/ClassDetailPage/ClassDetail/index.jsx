@@ -23,7 +23,8 @@ const ClassDetail = () => {
                                 { name: 'Trang chủ', path: '/' },
                                 { name: 'Lớp học của tôi', path: '/class' },
                                 { name: 'Chi tiết lớp học', path: null }, // trang hiện tại
-                                { name: 'Mọi người', path: '/class-detail/' + classDetail?._id + '/peoples' }
+                                { name: 'Mọi người', path: '/class-detail/' + classDetail?._id + '/peoples' },
+                                { name: 'Tin nhắn', path: '/class-detail/' + classDetail?._id + '/chat' }
                             ]}/>
                     </div>
                     <div className='card-body'>

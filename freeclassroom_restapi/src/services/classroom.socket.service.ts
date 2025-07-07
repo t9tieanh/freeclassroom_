@@ -4,6 +4,7 @@ import { Socket as SocketIO } from 'socket.io'
 import authenticate from '../middleware/authentication.socket.midleware'
 import { EventSocket, sendToSocket, sendToRoom } from '~/dto/response/send-response.socket'
 import UserService from './user.service'
+import MessageService from './message.service'
 
 // connection tới namspace classroom
 const connection = async (socket: SocketIO) => {
@@ -46,6 +47,15 @@ const connection = async (socket: SocketIO) => {
     }
 
     const userData = await UserService.getProfile(socket.user)
+
+    // thêm message vào db
+    await MessageService.addMessage({
+      content: message,
+      sender: socket.user.userId as string,
+      classroom: classroomId
+    }).catch((e: any) => {
+      console.log('Có lỗi khi lưu message: ' + e)
+    })
 
     sendToRoom(Socket.getIO().of('/classroom'), roomName, EventSocket.NEW_MESSAGE, {
       sender: {

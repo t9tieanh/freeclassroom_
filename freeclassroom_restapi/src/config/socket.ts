@@ -4,7 +4,12 @@ import { Server as ServerIO } from 'socket.io'
 let io: ServerIO | null = null
 
 function setupSocket(server: Server) {
-  io = new ServerIO(server)
+  io = new ServerIO(server, {
+    cors: {
+      origin: 'http://localhost:3000',
+      credentials: true
+    }
+  })
 
   // connection
   io.on('connection', (socket) => {

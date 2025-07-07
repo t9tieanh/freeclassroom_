@@ -47,7 +47,8 @@ const PeopleClassDetail = () => {
                 { name: 'Trang chủ', path: '/' },
                 { name: 'Lớp học của tôi', path: '/class' },
                 { name: 'Chi tiết lớp học', path: `/class-detail/` + classDetail?._id },
-                { name: 'Thành viên', path: null }
+                { name: 'Thành viên', path: null },
+                { name: 'Tin nhắn', path: '/class-detail/' + classDetail?._id + '/chat' }
             ]}/>
 
             <Table striped bordered hover className='align-middle mb-0 bg-white mt-4'>

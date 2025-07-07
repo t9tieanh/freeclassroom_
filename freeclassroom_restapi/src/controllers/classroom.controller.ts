@@ -3,6 +3,7 @@ import sendResponse from '~/dto/response/send-response'
 import { classRoomService } from '~/services'
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '~/middleware/ApiError'
+import { MessageService } from '~/services'
 
 // tạo lớp học -> chỉ teacher tạo
 const createClassroom = async (req: Request, res: Response) => {
@@ -68,13 +69,22 @@ const getPeoplesByClassRoom = async (req: Request, res: Response) => {
   })
 }
 
+const getChatHistory = async (req: Request, res: Response) => {
+  sendResponse(res, {
+    code: StatusCodes.OK,
+    message: 'Lấy lịch sử chat thành công !',
+    result: await MessageService.getMessageByClassRoom(req.params.id)
+  })
+}
+
 const classRoomController = {
   createClassroom,
   addSection,
   joinClassroom,
   findClassRoomById,
   getPaginatedClassRooms,
-  getPeoplesByClassRoom
+  getPeoplesByClassRoom,
+  getChatHistory
 }
 
 export default classRoomController
